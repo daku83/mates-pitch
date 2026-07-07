@@ -258,6 +258,11 @@
   .ai-mock .bd { padding: 20px 18px; }
   .ai-mock .lbl { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
   .ai-mock .sym { font-size: 1rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
+  .agent-steps { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .agent-steps li { position: relative; padding-left: 24px; font-size: .84rem; color: var(--body); }
+  .agent-steps li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--teal-dk); font-weight: 700; }
+  .agent-steps li.t { color: var(--orange-dk); font-weight: 700; }
+  .agent-steps li.t::before { content: "→"; color: var(--orange); }
   .ai-answer { border-left: 3px solid var(--teal); background: var(--teal-soft); padding: 16px; border-radius: 0 10px 10px 0; margin-top: 18px; }
   .ai-answer .cause { font-size: 1.05rem; font-weight: 700; color: var(--ink); margin-top: 4px; }
   .conf { height: 8px; background: rgba(0,170,167,.18); border-radius: 100px; overflow: hidden; margin-top: 14px; }
@@ -756,16 +761,18 @@
         <span class="en">Three weeks later: another EX90, the same knocking.</span>
       </h2>
       <p class="lead reveal d2" style="margin-top:22px;">
-        <span class="de">Diesmal sucht niemand stundenlang. Der Diagnose-Assistent hat aus Michaels Fall gelernt —
-          und schlägt die wahrscheinliche Ursache in Sekunden vor.</span>
-        <span class="en">This time nobody searches for hours. The Diagnosis Assistant has learned from Michael's case —
-          and suggests the probable cause within seconds.</span>
+        <span class="de">Diesmal sucht niemand stundenlang. Der Diagnose-Assistent arbeitet als <b>Agent</b>:
+          Er prüft Historie, Aufträge und dokumentierte Fälle selbstständig — und schlägt die wahrscheinliche Ursache in Sekunden vor.</span>
+        <span class="en">This time nobody searches for hours. The Diagnosis Assistant works as an <b>agent</b>:
+          it checks history, orders and documented cases on its own — and suggests the probable cause within seconds.</span>
       </p>
       <ul class="ai-feats reveal d2">
+        <li><span class="de"><b>Ein Agent, kein weiteres Suchfeld.</b> Der Assistent durchsucht Fahrzeughistorie, frühere Aufträge und dokumentierte Fälle selbstständig — kein manuelles Checken in verschiedenen Systemen.</span>
+          <span class="en"><b>An agent, not another search box.</b> The assistant searches vehicle history, past orders and documented cases on its own — no manual checking across separate systems.</span></li>
+        <li><span class="de"><b>Minuten statt Stunden.</b> Was früher Parallel-Recherche in DMS, Historie und Papierakten war, liefert der Agent in Sekunden dorthin, wo gearbeitet wird: ans techMate.</span>
+          <span class="en"><b>Minutes instead of hours.</b> What used to be parallel research across the DMS, history and paper files, the agent delivers in seconds to where the work happens: techMate.</span></li>
         <li><span class="de"><b>Lernt aus jedem dokumentierten Fall.</b> Jede bestätigte Ursache wird Wissen — markenübergreifend, über alle Standorte.</span>
           <span class="en"><b>Learns from every documented case.</b> Every confirmed cause becomes knowledge — across brands and locations.</span></li>
-        <li><span class="de"><b>Schlägt Ursachen vor, statt suchen zu lassen.</b> Symptom am techMate eingeben, wahrscheinliche Ursachen mit Konfidenz erhalten.</span>
-          <span class="en"><b>Suggests causes instead of leaving you searching.</b> Enter a symptom on techMate and get probable causes with confidence scores.</span></li>
         <li><span class="de"><b>Das Wissen bleibt im Autohaus.</b> Auch wenn der erfahrenste Techniker in Rente geht — seine Diagnosen bleiben.</span>
           <span class="en"><b>The knowledge stays in the dealership.</b> Even when your most experienced technician retires — his diagnoses remain.</span></li>
       </ul>
@@ -780,6 +787,13 @@
             <span class="de">„Klopfgeräusch aus dem Kofferraum ab ca. 100&nbsp;km/h" · Volvo EX90</span>
             <span class="en">"Knocking noise from the trunk from approx. 100&nbsp;km/h" · Volvo EX90</span>
           </p>
+          <div class="lbl" style="margin-top:18px;"><span class="de">Agent — prüft selbstständig</span><span class="en">Agent — checks on its own</span></div>
+          <ul class="agent-steps">
+            <li><span class="de">Fahrzeughistorie geprüft — DMS</span><span class="en">Vehicle history checked — DMS</span></li>
+            <li><span class="de">214 frühere Aufträge durchsucht</span><span class="en">214 past orders searched</span></li>
+            <li><span class="de">3 ähnliche Fälle gefunden</span><span class="en">3 similar cases found</span></li>
+            <li class="t"><span class="de">Vorschlag nach 4 Sekunden — ohne manuelles Suchen</span><span class="en">Suggestion after 4 seconds — no manual searching</span></li>
+          </ul>
           <div class="ai-answer">
             <div class="lbl" style="color:var(--teal-dk)"><span class="de">Wahrscheinliche Ursache</span><span class="en">Probable cause</span></div>
             <div class="cause"><span class="de">Kofferraumabdeckung nicht korrekt montiert</span><span class="en">Trunk cover not mounted correctly</span></div>
