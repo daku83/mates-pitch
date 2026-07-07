@@ -341,6 +341,20 @@
   .scene.old .num { background: var(--red); }
   .scene.old svg { filter: saturate(.5); }
 
+  /* ---------- PRAESENTATION: Dots + Tastatur ---------- */
+  section { scroll-margin-top: 74px; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  .dots { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: 10px; }
+  .dots button { width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--muted); background: transparent; cursor: pointer; padding: 0; position: relative; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+  .dots button:hover { border-color: var(--orange); transform: scale(1.25); }
+  .dots button.on { background: var(--orange); border-color: var(--orange); transform: scale(1.2); }
+  .dots button::after { content: attr(data-label); position: absolute; right: 22px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: .72rem; font-weight: 600; color: #fff; background: var(--ink); padding: 4px 10px; border-radius: 6px; opacity: 0; pointer-events: none; transition: opacity .15s ease; }
+  .dots button:hover::after, .dots button:focus-visible::after { opacity: 1; }
+  .dots button:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+  .kbd-hint { position: fixed; left: 18px; bottom: 18px; z-index: 60; font-size: .75rem; font-weight: 600; color: var(--body); background: var(--paper); border: 1px solid var(--line-2); border-radius: 100px; padding: 8px 16px; box-shadow: 0 8px 24px rgba(35,40,44,.12); transition: opacity .8s ease; }
+  .kbd-hint.hide { opacity: 0; pointer-events: none; }
+  @media (max-width: 860px) { .dots, .kbd-hint { display: none; } }
+
   /* ---------- reveal ---------- */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
   .reveal.in { opacity: 1; transform: none; }
@@ -1278,6 +1292,73 @@
     }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
     els.forEach(function (e) { io.observe(e); });
     var pipe = document.getElementById('pipe'); if (pipe) io.observe(pipe);
+  })();
+</script>
+<script>
+  /* ----- Praesentationsmodus: Pfeiltasten/Leertaste/Clicker + Kapitel-Dots ----- */
+  (function () {
+    var sections = Array.prototype.slice.call(document.querySelectorAll('section'));
+    if (!sections.length) return;
+    var labels = [
+      {de:'Start', en:'Start'}, {de:'Warum jetzt?', en:'Why now?'}, {de:'Die Geschichte', en:'The story'},
+      {de:'Die Annahme', en:'Check-in'}, {de:'Die Reise', en:'The journey'}, {de:'Die Abholung', en:'Pickup'},
+      {de:'KI-Agent', en:'AI agent'}, {de:'Die Suite', en:'The suite'}, {de:'Vorher / Nachher', en:'Before / after'},
+      {de:'Kontakt', en:'Contact'}
+    ];
+    var dotsNav = document.createElement('nav');
+    dotsNav.className = 'dots';
+    var dots = sections.map(function (sec, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.addEventListener('click', function () { go(i); });
+      dotsNav.appendChild(b);
+      return b;
+    });
+    document.body.appendChild(dotsNav);
+    function refreshLabels() {
+      var en = document.body.classList.contains('en');
+      dotsNav.setAttribute('aria-label', en ? 'Sections' : 'Abschnitte');
+      dots.forEach(function (b, i) {
+        var l = labels[i] || {de: 'Abschnitt ' + (i + 1), en: 'Section ' + (i + 1)};
+        b.setAttribute('data-label', en ? l.en : l.de);
+        b.setAttribute('aria-label', en ? l.en : l.de);
+      });
+    }
+    refreshLabels();
+    new MutationObserver(refreshLabels).observe(document.body, {attributes: true, attributeFilter: ['class']});
+    var current = 0;
+    if ('IntersectionObserver' in window) {
+      var spy = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) {
+            current = sections.indexOf(e.target);
+            dots.forEach(function (b, i) { b.classList.toggle('on', i === current); });
+          }
+        });
+      }, {rootMargin: '-45% 0px -45% 0px'});
+      sections.forEach(function (s) { spy.observe(s); });
+    }
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function go(i) {
+      i = Math.max(0, Math.min(sections.length - 1, i));
+      current = i;
+      dots.forEach(function (b, k) { b.classList.toggle('on', k === i); });
+      sections[i].scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
+    }
+    document.addEventListener('keydown', function (ev) {
+      if (ev.altKey || ev.ctrlKey || ev.metaKey) return;
+      var t = ev.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if (ev.key === 'ArrowRight' || ev.key === 'PageDown' || (ev.key === ' ' && !ev.shiftKey)) { ev.preventDefault(); go(current + 1); }
+      else if (ev.key === 'ArrowLeft' || ev.key === 'PageUp' || (ev.key === ' ' && ev.shiftKey)) { ev.preventDefault(); go(current - 1); }
+      else if (ev.key === 'Home') { ev.preventDefault(); go(0); }
+      else if (ev.key === 'End') { ev.preventDefault(); go(sections.length - 1); }
+    });
+    var hint = document.createElement('div');
+    hint.className = 'kbd-hint';
+    hint.innerHTML = '<span class="de">Präsentieren: ◀ ▶ oder Leertaste</span><span class="en">Present: ◀ ▶ or space bar</span>';
+    document.body.appendChild(hint);
+    setTimeout(function () { hint.classList.add('hide'); }, 8000);
   })();
 </script>
 
