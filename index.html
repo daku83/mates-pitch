@@ -319,6 +319,19 @@
   .proof p { max-width: 58ch; margin: 12px auto 0; color: var(--body); font-size: 1.02rem; }
   .proof b { color: var(--ink); }
 
+  /* ---------- WARUM JETZT (dark) ---------- */
+  .whynow { background: var(--dark); color: var(--dark-body); }
+  .whynow h2 { color: #fff; }
+  .whynow .head { max-width: 62ch; }
+  .wn-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 52px; }
+  .wn-card { background: var(--dark-2); border: 1px solid var(--dark-line); border-top: 3px solid var(--teal); border-radius: 14px; padding: 28px 26px; }
+  .wn-card.m2 { border-top-color: var(--orange); }
+  .wn-card .k { font-size: .7rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); }
+  .wn-card.m2 .k { color: var(--orange); }
+  .wn-card h3 { color: #fff; margin: 10px 0 12px; }
+  .wn-card p { font-size: .97rem; color: var(--dark-body); }
+  .wn-card b { color: #fff; }
+
   /* ---------- reveal ---------- */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
   .reveal.in { opacity: 1; transform: none; }
@@ -329,7 +342,7 @@
     .diag-strip { grid-template-columns: 1fr; gap: 22px; }
     .pipe { grid-template-columns: 1fr; gap: 30px; }
     .pipe::before, .pipe .sweep { display: none; }
-    .cards { grid-template-columns: 1fr; }
+    .cards, .wn-cards { grid-template-columns: 1fr; }
     .node { opacity: 1; }
     .hero-net { display: none; }
     .nav .navlink { display: none; }
@@ -778,6 +791,40 @@
         </figcaption>
       </figure>
 
+    </div>
+  </div>
+</section>
+
+<!-- WARUM JETZT -->
+<section class="band whynow">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow reveal"><span class="de">Warum jetzt?</span><span class="en">Why now?</span></p>
+      <h2 class="reveal d1"><span class="de">Drei Kräfte drücken auf den Aftersales: Menschen, Marken, Margen.</span><span class="en">Three forces are squeezing aftersales: people, brands, margins.</span></h2>
+      <p class="lead reveal d2" style="margin-top:18px; color:var(--dark-body)">
+        <span class="de">Alle drei machen den durchgängigen, lernenden Servicefluss vom Nice-to-have zum Muss.</span>
+        <span class="en">All three turn a continuous, learning service flow from a nice-to-have into a must.</span>
+      </p>
+    </div>
+    <div class="wn-cards">
+      <div class="wn-card reveal d1">
+        <span class="k"><span class="de">Menschen</span><span class="en">People</span></span>
+        <h3><span class="de">Fachkräftemangel</span><span class="en">Skilled-labor shortage</span></h3>
+        <p><span class="de">Erfahrene Techniker gehen in Rente, Nachwuchs ist kaum zu finden. Jede Stunde manuelles Suchen ist eine Stunde, die niemand mehr hat. <b>Der Diagnose-Agent macht Erfahrung teilbar</b> — das Wissen der Besten bleibt im Haus und hilft jedem am techMate.</span>
+        <span class="en">Experienced technicians are retiring and new talent is hard to find. Every hour of manual searching is an hour nobody has anymore. <b>The Diagnosis Agent makes experience shareable</b> — the knowledge of your best people stays in the house and helps everyone on techMate.</span></p>
+      </div>
+      <div class="wn-card m2 reveal d2">
+        <span class="k"><span class="de">Marken</span><span class="en">Brands</span></span>
+        <h3><span class="de">Mehrmarken-Realität</span><span class="en">Multi-brand reality</span></h3>
+        <p><span class="de">Händlergruppen führen heute 10, 17, 40+ Marken — aber jedes OEM-Tool sieht nur die eigene. <b>Die MATES arbeiten markenübergreifend</b>, und der Agent lernt über alle Marken hinweg. So entsteht Wissen, das kein Herstellersystem hat.</span>
+        <span class="en">Dealer groups run 10, 17, 40+ brands today — but every OEM tool only sees its own. <b>The MATES work across brands</b>, and the agent learns across all of them. That builds knowledge no manufacturer system has.</span></p>
+      </div>
+      <div class="wn-card reveal d3">
+        <span class="k"><span class="de">Margen</span><span class="en">Margins</span></span>
+        <h3><span class="de">EV-Aftersales</span><span class="en">EV aftersales</span></h3>
+        <p><span class="de">E-Fahrzeuge brauchen weniger Wartung — der Aftersales-Kuchen schrumpft. Wenn weniger Aufträge kommen, zählt jeder doppelt: Effizienz pro Auftrag und Kunden, die wiederkommen. <b>Übrigens: Sabines EX90 ist ein EV.</b> Ein verlorener EV-Kunde ist doppelt verloren.</span>
+        <span class="en">EVs need less maintenance — the aftersales pie is shrinking. When fewer orders come in, each one counts twice: efficiency per order, and customers who come back. <b>By the way: Sabine's EX90 is an EV.</b> A lost EV customer is lost twice.</span></p>
+      </div>
     </div>
   </div>
 </section>
