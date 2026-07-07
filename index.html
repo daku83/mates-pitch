@@ -1,0 +1,942 @@
+﻿<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>movec MATES – Ein Fahrzeug. Ein Team. Eine Wahrheit.</title>
+<meta name="description" content="servMate, techMate und Workshop Controller (Leitstand) – drei Blickwinkel auf denselben Vorgang. Storytelling-Pitch der movec MATES-Suite.">
+</head>
+<body>
+<style>
+  :root {
+    /* movec CI */
+    --orange:      #ED6B06;
+    --orange-dk:   #D45F04;
+    --orange-soft: rgba(237,107,6,.10);
+    --teal:        #00AAA7;
+    --teal-dk:     #00807E;
+    --teal-soft:   rgba(0,170,167,.10);
+    --grey-mark:   #63656A;
+
+    /* light grounds */
+    --paper:   #FFFFFF;
+    --paper-2: #F4F6F7;
+    --paper-3: #E9EDEF;
+    --ink:     #23282C;
+    --body:    #4C575F;
+    --muted:   #808C94;
+    --line:    #E3E8EA;
+    --line-2:  #D4DBDE;
+
+    /* dark brand bands */
+    --dark:   #0B2A2A;
+    --dark-2: #113838;
+    --dark-line: rgba(255,255,255,.11);
+    --dark-body: #B7C9C8;
+
+    /* semantic problem accent */
+    --red: #C94B33;
+
+    --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --geo:  "Century Gothic", "Futura", "Segoe UI", system-ui, sans-serif;
+    --wrap: 1140px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--body);
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ---------- language switch ---------- */
+  body.en .de { display: none !important; }
+  body:not(.en) .en { display: none !important; }
+
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 28px; }
+
+  h1, h2, h3 { text-wrap: balance; margin: 0; color: var(--ink); font-weight: 700; letter-spacing: -.02em; }
+  h1 { font-size: clamp(2.5rem, 6vw, 4.6rem); line-height: 1.03; letter-spacing: -.035em; font-weight: 800; }
+  h2 { font-size: clamp(1.85rem, 3.8vw, 3rem); line-height: 1.1; letter-spacing: -.03em; }
+  h3 { font-size: 1.24rem; letter-spacing: -.015em; }
+  p { margin: 0; }
+
+  .eyebrow {
+    font-size: .74rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--orange); margin: 0 0 18px; display: inline-flex; align-items: center; gap: 11px;
+  }
+  .eyebrow::before { content:""; width: 24px; height: 2px; background: var(--orange); border-radius: 2px; }
+
+  .lead { font-size: clamp(1.05rem, 1.7vw, 1.3rem); color: var(--body); line-height: 1.55; }
+  .tnum { font-variant-numeric: tabular-nums; }
+
+  .band { padding: clamp(78px, 11vh, 140px) 0; }
+  .rule { height: 1px; background: var(--line); border: 0; margin: 0; }
+
+  /* ---------- LOGO (offizielles movec-SVG via <use>) ---------- */
+  .logo { display: inline-flex; align-items: center; text-decoration: none; }
+  .logo .mark-full { display: block; }
+
+  /* ---------- NAV ---------- */
+  .nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+  .nav .right { display: flex; align-items: center; gap: 22px; }
+  .nav .navlink { font-size: .92rem; font-weight: 600; color: var(--body); text-decoration: none; }
+  .nav .navlink:hover { color: var(--ink); }
+
+  .lang { display: inline-flex; border: 1.5px solid var(--line-2); border-radius: 7px; overflow: hidden; }
+  .lang button {
+    font-family: var(--sans); font-size: .78rem; font-weight: 700; letter-spacing: .04em;
+    padding: 8px 13px; border: 0; background: transparent; color: var(--muted); cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .lang button:hover { color: var(--ink); }
+  .lang button.active { background: var(--ink); color: #fff; }
+  .lang button:focus-visible { outline: 2px solid var(--orange); outline-offset: -2px; }
+
+  .btn {
+    font-size: .92rem; font-weight: 600; letter-spacing: .01em; text-decoration: none;
+    padding: 12px 22px; border-radius: 7px; transition: transform .18s ease, background .18s ease, box-shadow .18s ease, border-color .18s;
+    display: inline-block;
+  }
+  .btn.solid { background: var(--orange); color: #fff; box-shadow: 0 6px 16px rgba(237,107,6,.28); }
+  .btn.solid:hover { background: var(--orange-dk); transform: translateY(-2px); box-shadow: 0 10px 22px rgba(237,107,6,.34); }
+  .btn.ghost { border: 1.5px solid var(--line-2); color: var(--ink); }
+  .btn.ghost:hover { border-color: var(--orange); color: var(--orange-dk); transform: translateY(-2px); }
+  .btn.ghost-dk { border: 1.5px solid var(--dark-line); color: #EAF0EF; }
+  .btn.ghost-dk:hover { border-color: var(--teal); transform: translateY(-2px); }
+  .nav .btn { padding: 10px 20px; }
+
+  /* ---------- HERO ---------- */
+  .hero { position: relative; padding: clamp(80px, 13vh, 150px) 0 clamp(60px, 9vh, 110px); overflow: hidden; }
+  .hero::before {
+    content:""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(70% 60% at 88% 4%, var(--teal-soft), transparent 60%),
+      radial-gradient(60% 55% at 96% 60%, var(--orange-soft), transparent 60%);
+  }
+  .hero-net { position: absolute; top: -20px; right: -50px; width: 600px; max-width: 62%; z-index: 0; opacity: .9; pointer-events: none; }
+  .hero .wrap { position: relative; z-index: 1; }
+  .hero h1 { max-width: 16ch; }
+  .hero .lead { max-width: 46ch; margin-top: 24px; }
+  .hero .btnrow { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
+
+  .signal {
+    margin-top: 40px; display: inline-flex; align-items: center; gap: 15px;
+    background: var(--paper); border: 1px solid var(--line-2); border-radius: 10px;
+    padding: 13px 20px 13px 15px; box-shadow: 0 10px 30px rgba(35,40,44,.06); max-width: 100%;
+  }
+  .wave { display: flex; align-items: center; gap: 3px; height: 28px; }
+  .wave span { width: 3px; border-radius: 2px; background: var(--teal); animation: bounce 1.1s ease-in-out infinite; }
+  @keyframes bounce { 0%,100% { height: 6px; opacity:.5 } 50% { height: 24px; opacity:1 } }
+  .signal .said { font-size: .92rem; color: var(--ink); }
+  .signal .said b { color: var(--teal-dk); font-weight: 700; }
+
+  /* ---------- STAKES ---------- */
+  .stakes { background: var(--paper-2); }
+  .stakes .wrap { display: grid; grid-template-columns: 1.05fr .95fr; gap: 54px; align-items: center; }
+  .quote {
+    border-left: 3px solid var(--orange); padding: 4px 0 4px 24px; margin: 0;
+    font-size: clamp(1.28rem, 2.3vw, 1.85rem); line-height: 1.34; font-weight: 700; letter-spacing: -.02em;
+    color: var(--ink); font-style: italic;
+  }
+  .quote cite { display: block; font-style: normal; font-size: .82rem; font-weight: 600; letter-spacing: .04em; color: var(--muted); margin-top: 14px; }
+  .fact-strip { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .fact { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; min-width: 128px; }
+  .fact .n { font-size: 1.55rem; font-weight: 800; color: var(--ink); letter-spacing: -.02em; }
+  .fact .n.o { color: var(--orange); }
+  .fact .l { font-size: .8rem; color: var(--muted); margin-top: 3px; }
+
+  /* ---------- BILDGESCHICHTE ---------- */
+  .comic .intro { max-width: 56ch; margin-top: 16px; }
+  .strip { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 50px; }
+  .scene { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease; }
+  .scene:hover { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(35,40,44,.10); }
+  .scene svg { display: block; width: 100%; height: auto; background: linear-gradient(180deg, #F7FAFA, #EFF3F4); border-bottom: 1px solid var(--line); }
+  .scene figcaption { display: flex; gap: 14px; padding: 18px 20px 20px; font-size: .95rem; color: var(--body); align-items: flex-start; line-height: 1.5; }
+  .scene .num { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--orange); color: #fff; font-weight: 800; font-size: .85rem; display: grid; place-items: center; margin-top: 2px; }
+  .scene b { color: var(--ink); }
+
+  .flow { stroke-dasharray: 6 12; animation: dash 1.4s linear infinite; }
+  @keyframes dash { to { stroke-dashoffset: -36; } }
+
+  /* ---------- SPLIT ---------- */
+  .split { background: var(--paper-2); }
+  .split-head { margin-bottom: 46px; }
+  .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .col-head { font-size: .74rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; display: flex; align-items: center; gap: 9px; margin-bottom: 16px; }
+  .col-head .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .frueher .col-head { color: var(--muted); } .frueher .dot { background: var(--red); }
+  .jetzt   .col-head { color: var(--teal-dk); } .jetzt   .dot { background: var(--teal); }
+
+  .panel { border-radius: 14px; padding: 30px; height: 100%; }
+  .panel.bad  { background: var(--paper-3); border: 1px solid var(--line-2); }
+  .panel.good { background: var(--paper); border: 1px solid var(--teal); box-shadow: 0 14px 40px rgba(0,170,167,.10); }
+  .panel h3 { margin-bottom: 12px; }
+  .panel .note { color: var(--body); font-size: .96rem; }
+
+  .note-card {
+    background: #EFE9DB; color: #2c2c2c; border-radius: 3px; padding: 22px 24px; margin: 4px 0 22px;
+    transform: rotate(-1.5deg); box-shadow: 0 14px 30px rgba(35,40,44,.16); position: relative;
+    background-image: repeating-linear-gradient(180deg, transparent 0 30px, rgba(0,0,0,.05) 30px 31px);
+  }
+  .note-card::after {
+    content: "ÜBERSEHEN"; position: absolute; top: 12px; right: -6px;
+    font-size: .6rem; font-weight: 700; letter-spacing: .16em; color: #fff; background: var(--red);
+    padding: 4px 10px; transform: rotate(4deg); box-shadow: 0 4px 10px rgba(0,0,0,.25); border-radius: 2px;
+  }
+  body.en .note-card::after { content: "OVERLOOKED"; }
+  .scrawl { font-family: "Segoe Script","Bradley Hand","Comic Sans MS",cursive; font-size: 1.5rem; line-height: 1.5; color: #2a2f3a; filter: blur(1px); opacity: .82; transform: skewX(-4deg); }
+  .scrawl .l2 { font-size: 1.1rem; opacity: .7; }
+
+  .app-card { background: var(--paper-2); border: 1px solid var(--line-2); border-radius: 12px; overflow: hidden; margin: 4px 0 22px; }
+  .app-bar { display: flex; align-items: center; gap: 9px; padding: 12px 16px; background: var(--paper-3); border-bottom: 1px solid var(--line-2); font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-dk); }
+  .app-bar .mic { width: 22px; height: 22px; border-radius: 50%; background: var(--teal); display: grid; place-items: center; color: #fff; font-size: .7rem; }
+  .app-body { padding: 18px 16px; }
+  .app-body .transcript { font-size: 1.08rem; color: var(--ink); line-height: 1.42; font-weight: 500; }
+  .app-body .transcript .hl { color: var(--teal-dk); background: var(--teal-soft); padding: 1px 4px; border-radius: 3px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+  .chip { font-size: .72rem; font-weight: 600; letter-spacing: .02em; padding: 5px 11px; border-radius: 100px; border: 1px solid var(--teal); color: var(--teal-dk); background: var(--teal-soft); }
+
+  /* ---------- PIPELINE (dark) ---------- */
+  .pipeline-sec { background: var(--dark); color: var(--dark-body); }
+  .pipeline-sec h2, .pipeline-sec h3 { color: #fff; }
+  .pipeline-sec .eyebrow { color: var(--teal); } .pipeline-sec .eyebrow::before { background: var(--teal); }
+  .pipeline-sec .head { max-width: 62ch; margin-bottom: 52px; }
+  .pipe { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; position: relative; }
+  .pipe::before { content:""; position: absolute; left: 8%; right: 8%; top: 34px; height: 2px; background: var(--dark-line); z-index: 0; }
+  .pipe .sweep { position: absolute; left: 8%; top: 34px; height: 2px; width: 0; z-index: 1; background: linear-gradient(90deg, transparent, var(--teal), var(--orange)); box-shadow: 0 0 12px var(--teal); }
+  .pipe.play .sweep { animation: sweep 2.4s ease forwards; }
+  @keyframes sweep { to { width: 84%; } }
+  .node { position: relative; z-index: 2; text-align: center; opacity: .34; transition: opacity .5s ease; }
+  .pipe.play .node.n1 { animation: pop .5s ease forwards .1s; }
+  .pipe.play .node.n2 { animation: pop .5s ease forwards 1.0s; }
+  .pipe.play .node.n3 { animation: pop .5s ease forwards 1.9s; }
+  @keyframes pop { to { opacity: 1; } }
+  .node .badge { width: 68px; height: 68px; margin: 0 auto 18px; border-radius: 50%; background: var(--dark-2); border: 2px solid var(--teal); display: grid; place-items: center; font-weight: 800; color: #fff; font-size: 1.35rem; box-shadow: 0 0 0 6px rgba(0,170,167,.08); }
+  .node.n3 .badge { border-color: var(--orange); box-shadow: 0 0 0 6px rgba(237,107,6,.10); }
+  .node .k { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .node.n3 .k { color: var(--orange); }
+  .node .t { font-weight: 700; font-size: 1.12rem; color: #fff; letter-spacing: -.01em; }
+  .node .d { color: var(--dark-body); font-size: .92rem; margin-top: 8px; max-width: 24ch; margin-inline: auto; }
+  .learning { margin-top: 44px; display: flex; gap: 20px; align-items: flex-start; background: var(--dark-2); border: 1px solid var(--dark-line); border-left: 3px solid var(--orange); border-radius: 12px; padding: 24px 26px; }
+  .learning .ai { font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); white-space: nowrap; padding-top: 3px; }
+  .learning p { color: #DCE7E6; } .learning b { color: #fff; }
+
+  /* ---------- PAYOFF ---------- */
+  .price-tag { text-align: center; margin: 0 auto 50px; max-width: 42ch; }
+  .price-tag .big { font-size: clamp(2.4rem,7vw,4rem); font-weight: 800; color: var(--ink); letter-spacing: -.03em; }
+  .price-tag .cap { color: var(--muted); font-size: .95rem; margin-top: 4px; }
+  .end-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .end-card { border-radius: 14px; padding: 32px; }
+  .end-card.bad  { background: var(--paper-2); border: 1px solid var(--line-2); }
+  .end-card.good { background: var(--paper); border: 1px solid var(--orange); box-shadow: 0 16px 44px rgba(237,107,6,.12); }
+  .end-card .tag { font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 14px; }
+  .end-card.bad .tag { color: var(--red); } .end-card.good .tag { color: var(--orange); }
+  .end-card .kick { font-size: 1.35rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; color: var(--ink); }
+  .end-card p { color: var(--body); margin-top: 13px; font-size: 1rem; }
+  .klopf { color: var(--red); letter-spacing: .06em; font-weight: 800; }
+
+  /* ---------- AI FEATURE: DIAGNOSE-ASSISTENT ---------- */
+  .ai-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 54px; align-items: center; }
+  .ai-chip { display: inline-flex; align-items: center; gap: 7px; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--teal-dk); background: linear-gradient(90deg, var(--teal-soft), var(--orange-soft)); border: 1px solid var(--teal); border-radius: 100px; padding: 5px 13px; }
+  .pcard .ai-chip { margin-top: 14px; align-self: flex-start; }
+  .ai-feats { list-style: none; padding: 0; margin: 30px 0 0; display: flex; flex-direction: column; gap: 18px; }
+  .ai-feats li { position: relative; padding-left: 30px; font-size: 1rem; line-height: 1.5; }
+  .ai-feats li::before { content: "✦"; position: absolute; left: 0; top: 0; color: var(--orange); font-size: 1.05rem; }
+  .ai-feats b { color: var(--ink); }
+  .ai-mock { border: 1px solid var(--line-2); border-radius: 14px; background: var(--paper); box-shadow: 0 18px 50px rgba(35,40,44,.10); overflow: hidden; }
+  .ai-mock .bar { display: flex; align-items: center; gap: 9px; padding: 13px 18px; background: var(--paper-3); border-bottom: 1px solid var(--line-2); font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-dk); }
+  .ai-mock .bar .spark { color: var(--orange); font-size: .9rem; }
+  .ai-mock .bd { padding: 20px 18px; }
+  .ai-mock .lbl { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .ai-mock .sym { font-size: 1rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
+  .ai-answer { border-left: 3px solid var(--teal); background: var(--teal-soft); padding: 16px; border-radius: 0 10px 10px 0; margin-top: 18px; }
+  .ai-answer .cause { font-size: 1.05rem; font-weight: 700; color: var(--ink); margin-top: 4px; }
+  .conf { height: 8px; background: rgba(0,170,167,.18); border-radius: 100px; overflow: hidden; margin-top: 14px; }
+  .conf span { display: block; height: 100%; width: 87%; background: linear-gradient(90deg, var(--teal), var(--orange)); border-radius: 100px; }
+  .conf-row { display: flex; justify-content: space-between; font-size: .78rem; font-weight: 600; color: var(--muted); margin-top: 6px; }
+  .ai-src { font-size: .82rem; color: var(--muted); margin-top: 14px; }
+  .mini-btn { display: inline-block; margin-top: 16px; font-size: .82rem; font-weight: 700; color: #fff; background: var(--orange); padding: 9px 16px; border-radius: 7px; }
+
+  /* ---------- PERSPECTIVES ---------- */
+  .persp { background: var(--paper-2); }
+  .persp .intro { max-width: 56ch; margin-top: 16px; }
+  .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 52px; }
+  .pcard { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 30px 28px; display: flex; flex-direction: column; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+  .pcard:hover { transform: translateY(-5px); box-shadow: 0 22px 48px rgba(35,40,44,.12); border-color: var(--orange); }
+  .pcard .role { font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--teal-dk); }
+  .pcard .pname { font-family: var(--geo); font-size: 1.55rem; font-weight: 700; color: var(--grey-mark); letter-spacing: -.01em; margin: 8px 0 2px; }
+  .pcard .pname b { color: var(--orange); font-weight: 700; }
+  .pcard .claim { font-weight: 700; color: var(--ink); font-size: 1.05rem; margin-top: 12px; letter-spacing: -.01em; }
+  .pcard ul { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-direction: column; gap: 10px; }
+  .pcard li { font-size: .95rem; color: var(--body); padding-left: 22px; position: relative; line-height: 1.4; }
+  .pcard li::before { content:""; position: absolute; left: 0; top: .5em; width: 9px; height: 9px; border-radius: 2px; background: var(--teal); }
+
+  /* ---------- CLOSING (dark) ---------- */
+  .closing { background: var(--dark); color: var(--dark-body); text-align: center; position: relative; overflow: hidden; }
+  .closing::before { content:""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(70% 100% at 50% 120%, rgba(237,107,6,.22), transparent 62%); }
+  .closing .wrap { position: relative; z-index: 1; }
+  .closing .eyebrow { color: var(--teal); } .closing .eyebrow::before { background: var(--teal); }
+  .closing h2 { color: #fff; max-width: 22ch; margin: 0 auto; }
+  .closing .thesis { max-width: 54ch; margin: 24px auto 0; color: var(--dark-body); font-size: 1.14rem; }
+  .closing .btnrow { display: flex; gap: 14px; justify-content: center; margin-top: 38px; flex-wrap: wrap; }
+
+  footer { background: var(--dark); border-top: 1px solid var(--dark-line); padding: 30px 0; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; font-size: .8rem; color: #7E9695; }
+  footer .prods { font-weight: 600; }
+
+  /* ---------- reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  .reveal.d1 { transition-delay: .08s; } .reveal.d2 { transition-delay: .16s; } .reveal.d3 { transition-delay: .24s; }
+
+  @media (max-width: 860px) {
+    .stakes .wrap, .split-grid, .end-grid, .strip, .ai-grid { grid-template-columns: 1fr; gap: 30px; }
+    .pipe { grid-template-columns: 1fr; gap: 30px; }
+    .pipe::before, .pipe .sweep { display: none; }
+    .cards { grid-template-columns: 1fr; }
+    .node { opacity: 1; }
+    .hero-net { display: none; }
+    .nav .navlink { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .wave span { animation: none; height: 15px; }
+    .pipe .node { opacity: 1 !important; animation: none !important; }
+    .pipe .sweep { display: none; }
+    .flow { animation: none; }
+  }
+</style>
+
+<!-- Offizielles movec-Logo (movec_logo_basic_bunt_grau.svg) als wiederverwendbares Symbol.
+     Graue Teile nutzen var(--lg), damit sie auf dunklem Grund aufgehellt werden können. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="mv-logo">
+      <path d="M313.946 255.011C307.442 261.909 299.815 267.242 291.022 271.012L358.509 355.387C365.013 348.249 371.717 342.635 380.308 337.782L313.946 255.011Z" fill="var(--lg,#63656A)"/>
+      <path d="M682.13 484V452.5H684.875L699.275 477.07H697.835L712.1 452.5H714.845V484H711.65V457.495H712.415L699.275 479.995H697.7L684.47 457.495H685.325V484H682.13ZM750.129 484.27C747.759 484.27 745.554 483.88 743.514 483.1C741.504 482.29 739.749 481.165 738.249 479.725C736.779 478.255 735.624 476.56 734.784 474.64C733.974 472.69 733.569 470.56 733.569 468.25C733.569 465.94 733.974 463.825 734.784 461.905C735.624 459.955 736.779 458.26 738.249 456.82C739.749 455.35 741.504 454.225 743.514 453.445C745.524 452.635 747.729 452.23 750.129 452.23C752.499 452.23 754.689 452.635 756.699 453.445C758.709 454.225 760.449 455.335 761.919 456.775C763.419 458.215 764.574 459.91 765.384 461.86C766.224 463.81 766.644 465.94 766.644 468.25C766.644 470.56 766.224 472.69 765.384 474.64C764.574 476.59 763.419 478.285 761.919 479.725C760.449 481.165 758.709 482.29 756.699 483.1C754.689 483.88 752.499 484.27 750.129 484.27ZM750.129 481.3C752.019 481.3 753.759 480.985 755.349 480.355C756.969 479.695 758.364 478.78 759.534 477.61C760.734 476.41 761.664 475.03 762.324 473.47C762.984 471.88 763.314 470.14 763.314 468.25C763.314 466.36 762.984 464.635 762.324 463.075C761.664 461.485 760.734 460.105 759.534 458.935C758.364 457.735 756.969 456.82 755.349 456.19C753.759 455.53 752.019 455.2 750.129 455.2C748.239 455.2 746.484 455.53 744.864 456.19C743.244 456.82 741.834 457.735 740.634 458.935C739.464 460.105 738.534 461.485 737.844 463.075C737.184 464.635 736.854 466.36 736.854 468.25C736.854 470.11 737.184 471.835 737.844 473.425C738.534 475.015 739.464 476.41 740.634 477.61C741.834 478.78 743.244 479.695 744.864 480.355C746.484 480.985 748.239 481.3 750.129 481.3ZM791.038 484V455.38H779.968V452.5H805.438V455.38H794.368V484H791.038ZM822.008 484V452.5H825.338V484H822.008ZM860.607 484.27C858.237 484.27 856.032 483.88 853.992 483.1C851.982 482.29 850.227 481.165 848.727 479.725C847.257 478.255 846.102 476.56 845.262 474.64C844.452 472.69 844.047 470.56 844.047 468.25C844.047 465.94 844.452 463.825 845.262 461.905C846.102 459.955 847.257 458.26 848.727 456.82C850.227 455.35 851.982 454.225 853.992 453.445C856.002 452.635 858.207 452.23 860.607 452.23C862.977 452.23 865.167 452.635 867.177 453.445C869.187 454.225 870.927 455.335 872.397 456.775C873.897 458.215 875.052 459.91 875.862 461.86C876.702 463.81 877.122 465.94 877.122 468.25C877.122 470.56 876.702 472.69 875.862 474.64C875.052 476.59 873.897 478.285 872.397 479.725C870.927 481.165 869.187 482.29 867.177 483.1C865.167 483.88 862.977 484.27 860.607 484.27ZM860.607 481.3C862.497 481.3 864.237 480.985 865.827 480.355C867.447 479.695 868.842 478.78 870.012 477.61C871.212 476.41 872.142 475.03 872.802 473.47C873.462 471.88 873.792 470.14 873.792 468.25C873.792 466.36 873.462 464.635 872.802 463.075C872.142 461.485 871.212 460.105 870.012 458.935C868.842 457.735 867.447 456.82 865.827 456.19C864.237 455.53 862.497 455.2 860.607 455.2C858.717 455.2 856.962 455.53 855.342 456.19C853.722 456.82 852.312 457.735 851.112 458.935C849.942 460.105 849.012 461.485 848.322 463.075C847.662 464.635 847.332 466.36 847.332 468.25C847.332 470.11 847.662 471.835 848.322 473.425C849.012 475.015 849.942 476.41 851.112 477.61C852.312 478.78 853.722 479.695 855.342 480.355C856.962 480.985 858.717 481.3 860.607 481.3ZM895.836 484V452.5H898.581L920.316 479.86H918.876V452.5H922.161V484H919.416L897.726 456.64H899.166V484H895.836ZM943.693 484V452.5H956.518C959.878 452.5 962.818 453.175 965.338 454.525C967.888 455.845 969.868 457.69 971.278 460.06C972.688 462.43 973.393 465.16 973.393 468.25C973.393 471.34 972.688 474.07 971.278 476.44C969.868 478.81 967.888 480.67 965.338 482.02C962.818 483.34 959.878 484 956.518 484H943.693ZM947.023 481.12H956.338C959.128 481.12 961.543 480.58 963.583 479.5C965.653 478.39 967.258 476.875 968.398 474.955C969.538 473.005 970.108 470.77 970.108 468.25C970.108 465.7 969.538 463.465 968.398 461.545C967.258 459.625 965.653 458.125 963.583 457.045C961.543 455.935 959.128 455.38 956.338 455.38H947.023V481.12ZM986.641 484L1001.04 452.5H1004.33L1018.73 484H1015.22L1001.99 454.435H1003.34L990.106 484H986.641ZM992.311 475.585L993.301 472.885H1011.62L1012.61 475.585H992.311ZM1039.72 484V455.38H1028.65V452.5H1054.12V455.38H1043.05V484H1039.72ZM1064.07 484L1078.47 452.5H1081.76L1096.16 484H1092.65L1079.42 454.435H1080.77L1067.54 484H1064.07ZM1069.74 475.585L1070.73 472.885H1089.05L1090.04 475.585H1069.74ZM1144.6 484L1130.65 452.5H1134.25L1147.3 482.155H1145.32L1158.46 452.5H1161.84L1147.89 484H1144.6ZM1180.63 466.585H1197.28V469.42H1180.63V466.585ZM1180.99 481.12H1199.93V484H1177.66V452.5H1199.26V455.38H1180.99V481.12ZM1232.6 484.27C1230.23 484.27 1228.04 483.88 1226.03 483.1C1224.02 482.29 1222.28 481.165 1220.81 479.725C1219.34 478.285 1218.19 476.59 1217.35 474.64C1216.54 472.69 1216.13 470.56 1216.13 468.25C1216.13 465.94 1216.54 463.81 1217.35 461.86C1218.19 459.91 1219.34 458.215 1220.81 456.775C1222.31 455.335 1224.07 454.225 1226.08 453.445C1228.09 452.635 1230.28 452.23 1232.65 452.23C1234.93 452.23 1237.07 452.62 1239.08 453.4C1241.09 454.15 1242.79 455.29 1244.17 456.82L1242.05 458.935C1240.76 457.615 1239.34 456.67 1237.78 456.1C1236.22 455.5 1234.54 455.2 1232.74 455.2C1230.85 455.2 1229.09 455.53 1227.47 456.19C1225.85 456.82 1224.44 457.735 1223.24 458.935C1222.04 460.105 1221.1 461.485 1220.41 463.075C1219.75 464.635 1219.42 466.36 1219.42 468.25C1219.42 470.14 1219.75 471.88 1220.41 473.47C1221.1 475.03 1222.04 476.41 1223.24 477.61C1224.44 478.78 1225.85 479.695 1227.47 480.355C1229.09 480.985 1230.85 481.3 1232.74 481.3C1234.54 481.3 1236.22 481 1237.78 480.4C1239.34 479.8 1240.76 478.84 1242.05 477.52L1244.17 479.635C1242.79 481.165 1241.09 482.32 1239.08 483.1C1237.07 483.88 1234.91 484.27 1232.6 484.27ZM1268.24 484V455.38H1257.17V452.5H1282.64V455.38H1271.57V484H1268.24ZM1312.54 484.27C1310.17 484.27 1307.97 483.88 1305.93 483.1C1303.92 482.29 1302.16 481.165 1300.66 479.725C1299.19 478.255 1298.04 476.56 1297.2 474.64C1296.39 472.69 1295.98 470.56 1295.98 468.25C1295.98 465.94 1296.39 463.825 1297.2 461.905C1298.04 459.955 1299.19 458.26 1300.66 456.82C1302.16 455.35 1303.92 454.225 1305.93 453.445C1307.94 452.635 1310.14 452.23 1312.54 452.23C1314.91 452.23 1317.1 452.635 1319.11 453.445C1321.12 454.225 1322.86 455.335 1324.33 456.775C1325.83 458.215 1326.99 459.91 1327.8 461.86C1328.64 463.81 1329.06 465.94 1329.06 468.25C1329.06 470.56 1328.64 472.69 1327.8 474.64C1326.99 476.59 1325.83 478.285 1324.33 479.725C1322.86 481.165 1321.12 482.29 1319.11 483.1C1317.1 483.88 1314.91 484.27 1312.54 484.27ZM1312.54 481.3C1314.43 481.3 1316.17 480.985 1317.76 480.355C1319.38 479.695 1320.78 478.78 1321.95 477.61C1323.15 476.41 1324.08 475.03 1324.74 473.47C1325.4 471.88 1325.73 470.14 1325.73 468.25C1325.73 466.36 1325.4 464.635 1324.74 463.075C1324.08 461.485 1323.15 460.105 1321.95 458.935C1320.78 457.735 1319.38 456.82 1317.76 456.19C1316.17 455.53 1314.43 455.2 1312.54 455.2C1310.65 455.2 1308.9 455.53 1307.28 456.19C1305.66 456.82 1304.25 457.735 1303.05 458.935C1301.88 460.105 1300.95 461.485 1300.26 463.075C1299.6 464.635 1299.27 466.36 1299.27 468.25C1299.27 470.11 1299.6 471.835 1300.26 473.425C1300.95 475.015 1301.88 476.41 1303.05 477.61C1304.25 478.78 1305.66 479.695 1307.28 480.355C1308.9 480.985 1310.65 481.3 1312.54 481.3ZM1347.77 484V452.5H1359.56C1362.23 452.5 1364.52 452.935 1366.44 453.805C1368.36 454.645 1369.83 455.875 1370.85 457.495C1371.9 459.085 1372.43 461.02 1372.43 463.3C1372.43 465.52 1371.9 467.44 1370.85 469.06C1369.83 470.65 1368.36 471.88 1366.44 472.75C1364.52 473.59 1362.23 474.01 1359.56 474.01H1349.61L1351.1 472.48V484H1347.77ZM1369.28 484L1361.18 472.57H1364.78L1372.92 484H1369.28ZM1351.1 472.75L1349.61 471.175H1359.47C1362.62 471.175 1365 470.485 1366.62 469.105C1368.27 467.725 1369.1 465.79 1369.1 463.3C1369.1 460.78 1368.27 458.83 1366.62 457.45C1365 456.07 1362.62 455.38 1359.47 455.38H1349.61L1351.1 453.805V472.75Z" fill="var(--lg,#63656A)"/>
+      <path d="M752.34 275.9C763.647 275.9 773.628 278.108 782.285 282.525C791.118 286.942 798.008 293.743 802.955 302.93C807.902 311.94 810.375 323.6 810.375 337.91V419H777.25V342.15C777.25 329.607 774.512 320.243 769.035 314.06C763.558 307.877 755.697 304.785 745.45 304.785C738.207 304.785 731.758 306.375 726.105 309.555C720.628 312.735 716.3 317.417 713.12 323.6C710.117 329.783 708.615 337.645 708.615 347.185V419H675.49V342.15C675.49 329.607 672.752 320.243 667.275 314.06C661.798 307.877 653.937 304.785 643.69 304.785C636.447 304.785 629.998 306.375 624.345 309.555C618.868 312.735 614.54 317.417 611.36 323.6C608.357 329.783 606.855 337.645 606.855 347.185V419H573.73V277.49H605.265V315.12L599.7 303.99C604.47 294.803 611.36 287.825 620.37 283.055C629.557 278.285 639.98 275.9 651.64 275.9C664.89 275.9 676.373 279.168 686.09 285.705C695.983 292.242 702.52 302.135 705.7 315.385L692.715 310.88C697.308 300.28 704.905 291.8 715.505 285.44C726.105 279.08 738.383 275.9 752.34 275.9ZM916.563 420.855C902.077 420.855 889.18 417.763 877.873 411.58C866.567 405.22 857.645 396.563 851.108 385.61C844.572 374.657 841.303 362.202 841.303 348.245C841.303 334.112 844.572 321.657 851.108 310.88C857.645 299.927 866.567 291.358 877.873 285.175C889.18 278.992 902.077 275.9 916.563 275.9C931.227 275.9 944.212 278.992 955.518 285.175C967.002 291.358 975.923 299.838 982.283 310.615C988.82 321.392 992.088 333.935 992.088 348.245C992.088 362.202 988.82 374.657 982.283 385.61C975.923 396.563 967.002 405.22 955.518 411.58C944.212 417.763 931.227 420.855 916.563 420.855ZM916.563 392.5C924.69 392.5 931.933 390.733 938.293 387.2C944.653 383.667 949.6 378.543 953.133 371.83C956.843 365.117 958.698 357.255 958.698 348.245C958.698 339.058 956.843 331.197 953.133 324.66C949.6 317.947 944.653 312.823 938.293 309.29C931.933 305.757 924.778 303.99 916.828 303.99C908.702 303.99 901.458 305.757 895.098 309.29C888.915 312.823 883.968 317.947 880.258 324.66C876.548 331.197 874.693 339.058 874.693 348.245C874.693 357.255 876.548 365.117 880.258 371.83C883.968 378.543 888.915 383.667 895.098 387.2C901.458 390.733 908.613 392.5 916.563 392.5ZM1057.51 419L996.827 277.49H1031.28L1083.48 402.305H1066.52L1120.58 277.49H1152.38L1091.7 419H1057.51ZM1235.72 420.855C1220 420.855 1206.22 417.763 1194.38 411.58C1182.72 405.22 1173.62 396.563 1167.08 385.61C1160.72 374.657 1157.54 362.202 1157.54 348.245C1157.54 334.112 1160.64 321.657 1166.82 310.88C1173.18 299.927 1181.84 291.358 1192.79 285.175C1203.92 278.992 1216.55 275.9 1230.68 275.9C1244.46 275.9 1256.74 278.903 1267.52 284.91C1278.3 290.917 1286.78 299.397 1292.96 310.35C1299.14 321.303 1302.23 334.2 1302.23 349.04C1302.23 350.453 1302.15 352.043 1301.97 353.81C1301.97 355.577 1301.88 357.255 1301.7 358.845H1183.78V336.85H1284.21L1271.23 343.74C1271.41 335.613 1269.73 328.458 1266.19 322.275C1262.66 316.092 1257.8 311.233 1251.62 307.7C1245.61 304.167 1238.63 302.4 1230.68 302.4C1222.56 302.4 1215.4 304.167 1209.22 307.7C1203.21 311.233 1198.44 316.18 1194.91 322.54C1191.55 328.723 1189.87 336.055 1189.87 344.535V349.835C1189.87 358.315 1191.82 365.823 1195.7 372.36C1199.59 378.897 1205.07 383.932 1212.13 387.465C1219.2 390.998 1227.33 392.765 1236.51 392.765C1244.46 392.765 1251.62 391.528 1257.98 389.055C1264.34 386.582 1269.99 382.695 1274.94 377.395L1292.69 397.8C1286.33 405.22 1278.3 410.962 1268.58 415.025C1259.04 418.912 1248.09 420.855 1235.72 420.855ZM1398.98 420.855C1384.14 420.855 1370.89 417.763 1359.23 411.58C1347.74 405.22 1338.73 396.563 1332.2 385.61C1325.66 374.657 1322.39 362.202 1322.39 348.245C1322.39 334.112 1325.66 321.657 1332.2 310.88C1338.73 299.927 1347.74 291.358 1359.23 285.175C1370.89 278.992 1384.14 275.9 1398.98 275.9C1412.76 275.9 1424.86 278.727 1435.28 284.38C1445.88 289.857 1453.92 297.983 1459.4 308.76L1433.96 323.6C1429.72 316.887 1424.51 311.94 1418.32 308.76C1412.32 305.58 1405.78 303.99 1398.71 303.99C1390.59 303.99 1383.25 305.757 1376.72 309.29C1370.18 312.823 1365.06 317.947 1361.35 324.66C1357.64 331.197 1355.78 339.058 1355.78 348.245C1355.78 357.432 1357.64 365.382 1361.35 372.095C1365.06 378.632 1370.18 383.667 1376.72 387.2C1383.25 390.733 1390.59 392.5 1398.71 392.5C1405.78 392.5 1412.32 390.91 1418.32 387.73C1424.51 384.55 1429.72 379.603 1433.96 372.89L1459.4 387.73C1453.92 398.33 1445.88 406.545 1435.28 412.375C1424.86 418.028 1412.76 420.855 1398.98 420.855Z" fill="var(--lg,#63656A)"/>
+      <path d="M420.816 493.139C466.668 493.139 503.839 456.009 503.839 410.207C503.839 364.405 466.668 327.276 420.816 327.276C374.964 327.276 337.793 364.405 337.793 410.207C337.793 456.009 374.964 493.139 420.816 493.139Z" fill="#ED6B06"/>
+      <path d="M264.566 276.386C301.926 276.386 332.213 246.132 332.213 208.813C332.213 171.494 301.926 141.241 264.566 141.241C227.206 141.241 196.919 171.494 196.919 208.813C196.919 246.132 227.206 276.386 264.566 276.386Z" fill="#00AAA7"/>
+      <path d="M240.558 461.498C239.956 461.699 239.314 461.498 238.993 460.977C227.109 443.412 207.036 431.823 184.233 431.863C149.104 431.943 119.356 460.857 118.352 495.906C117.308 533.201 147.258 563.759 184.353 563.759C221.448 563.759 250.354 534.244 250.354 497.831C250.354 495.024 249.953 492.297 249.551 489.57C249.471 488.928 249.832 488.287 250.434 488.086L348.713 451.433C344.257 443.212 341.045 434.55 339.078 425.125L240.518 461.498H240.558ZM221.007 506.453C217.916 520.248 206.755 531.397 192.944 534.485C165.524 540.58 141.517 516.599 147.659 489.249C150.75 475.454 161.911 464.306 175.722 461.218C203.142 455.122 227.149 479.103 221.007 506.453Z" fill="var(--lg,#63656A)"/>
+    </g>
+  </defs>
+</svg>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="movec — MotionData Vector">
+      <svg class="mark-full" viewBox="110 134 1360 440" width="136" height="44" role="img"><use href="#mv-logo"/></svg>
+    </a>
+    <div class="right">
+      <a class="navlink" href="#story"><span class="de">Die Geschichte</span><span class="en">The story</span></a>
+      <a class="navlink" href="#produkte"><span class="de">Die Suite</span><span class="en">The suite</span></a>
+      <div class="lang" role="group" aria-label="Sprache / Language">
+        <button type="button" id="btn-de" class="active" aria-pressed="true">DE</button>
+        <button type="button" id="btn-en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn solid" href="#kontakt"><span class="de">Demo anfragen</span><span class="en">Request a demo</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <svg class="hero-net" viewBox="0 0 600 460" aria-hidden="true">
+    <g stroke="#CBD5D6" stroke-width="2" fill="none">
+      <line x1="150" y1="90" x2="330" y2="60"/><line x1="330" y1="60" x2="470" y2="150"/>
+      <line x1="150" y1="90" x2="220" y2="260"/><line x1="220" y1="260" x2="400" y2="300"/>
+      <line x1="470" y1="150" x2="400" y2="300"/>
+      <line x1="220" y1="260" x2="150" y2="410"/><line x1="400" y1="300" x2="500" y2="400"/>
+    </g>
+    <circle cx="330" cy="60" r="13" fill="#00AAA7"/>
+    <circle cx="470" cy="150" r="18" fill="#ED6B06"/>
+    <circle cx="150" cy="90" r="10" fill="none" stroke="#9AA5A6" stroke-width="5"/>
+    <circle cx="220" cy="260" r="14" fill="#00AAA7" opacity=".55"/>
+    <circle cx="400" cy="300" r="11" fill="#ED6B06" opacity=".55"/>
+    <circle cx="150" cy="410" r="9" fill="none" stroke="#9AA5A6" stroke-width="5"/>
+    <circle cx="500" cy="400" r="8" fill="#00AAA7" opacity=".4"/>
+  </svg>
+  <div class="wrap">
+    <p class="eyebrow reveal"><span class="de">Die vernetzte Werkstatt</span><span class="en">The connected workshop</span></p>
+    <h1 class="reveal d1">
+      <span class="de">Ein Fahrzeug.<br>Ein Team.<br>Eine Wahrheit.</span>
+      <span class="en">One vehicle.<br>One team.<br>One truth.</span>
+    </h1>
+    <p class="lead reveal d2">
+      <span class="de">servMate, techMate und Leitstand sind keine drei Werkzeuge.
+        Sie sind drei Blickwinkel auf denselben Vorgang — vom Empfang bis zur Abholung.</span>
+      <span class="en">servMate, techMate and Workshop Controller are not three tools.
+        They are three perspectives on the same job — from reception to pickup.</span>
+    </p>
+    <div class="btnrow reveal d2">
+      <a class="btn solid" href="#kontakt"><span class="de">Live-Demo anfragen</span><span class="en">Request a live demo</span></a>
+      <a class="btn ghost" href="#story"><span class="de">Die Geschichte ansehen</span><span class="en">See the story</span></a>
+    </div>
+    <div class="signal reveal d3">
+      <div class="wave" aria-hidden="true">
+        <span style="animation-delay:0s"></span><span style="animation-delay:.15s"></span>
+        <span style="animation-delay:.3s"></span><span style="animation-delay:.1s"></span>
+        <span style="animation-delay:.25s"></span><span style="animation-delay:.05s"></span>
+        <span style="animation-delay:.2s"></span>
+      </div>
+      <span class="said">
+        <span class="de">Kunde: <b>„…ein Klopfen aus dem Kofferraum ab 100 km/h."</b></span>
+        <span class="en">Customer: <b>"…a knocking from the trunk at 100 km/h."</b></span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- STAKES -->
+<section class="band stakes" id="story">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow reveal"><span class="de">Die Geschichte</span><span class="en">The story</span></p>
+      <h2 class="reveal d1">
+        <span class="de">Ein Satz entscheidet, ob der Kunde wiederkommt.</span>
+        <span class="en">One sentence decides whether the customer comes back.</span>
+      </h2>
+      <p class="lead reveal d2" style="margin-top:22px;">
+        <span class="de">Sabine Berger bringt ihren Volvo EX90 zum Service.
+          Kein Fahrzeug, bei dem man Fehler verzeiht. Beim Annahmegespräch meldet sie ein Problem,
+          das sie wirklich stört — und an genau diesem einen Satz entscheidet sich alles Weitere.</span>
+        <span class="en">Sabine Berger brings her Volvo EX90 in for service.
+          Not a car that forgives mistakes. At check-in she reports an issue that genuinely bothers her —
+          and this one sentence decides everything that follows.</span>
+      </p>
+    </div>
+    <div class="reveal d2">
+      <blockquote class="quote">
+        <span class="de">„Ab 100 km/h höre ich ein Klopfen aus dem Kofferraum. Das nervt mich total."</span>
+        <span class="en">"From 100 km/h I hear a knocking from the trunk. It's driving me crazy."</span>
+        <cite>— Sabine Berger, Volvo EX90</cite>
+      </blockquote>
+      <div class="fact-strip">
+        <div class="fact"><div class="n tnum"><span class="de">100.000&nbsp;€</span><span class="en">€100,000</span></div>
+          <div class="l"><span class="de">Fahrzeugwert</span><span class="en">Vehicle value</span></div></div>
+        <div class="fact"><div class="n tnum"><span class="de">1.500&nbsp;€</span><span class="en">€1,500</span></div>
+          <div class="l"><span class="de">Servicerechnung</span><span class="en">Service invoice</span></div></div>
+        <div class="fact"><div class="n o"><span class="de">1 Satz</span><span class="en">1 sentence</span></div>
+          <div class="l"><span class="de">der überleben muss</span><span class="en">that must survive</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- BILDGESCHICHTE -->
+<section class="band comic">
+  <div class="wrap">
+    <p class="eyebrow reveal"><span class="de">Bildgeschichte</span><span class="en">Picture story</span></p>
+    <h2 class="reveal d1">
+      <span class="de">Die Geschichte in vier Bildern.</span>
+      <span class="en">The story in four pictures.</span>
+    </h2>
+    <p class="intro lead reveal d2">
+      <span class="de">Vom ersten Satz an der Annahme bis zur stillen Heimfahrt — so reist Sabines Beanstandung durch das Autohaus.</span>
+      <span class="en">From the first sentence at check-in to a silent drive home — this is how Sabine's complaint travels through the dealership.</span>
+    </p>
+
+    <div class="strip">
+      <!-- SCENE 1: Annahme -->
+      <figure class="scene reveal d1">
+        <svg viewBox="0 0 400 250" role="img" aria-label="Annahme / Check-in">
+          <line x1="20" y1="200" x2="380" y2="200" stroke="#DDE4E6" stroke-width="3" stroke-linecap="round"/>
+          <!-- car -->
+          <rect x="245" y="112" width="104" height="50" rx="14" fill="#3C4348"/>
+          <rect x="256" y="120" width="38" height="26" rx="6" fill="#AEC3C6"/>
+          <rect x="300" y="120" width="38" height="26" rx="6" fill="#AEC3C6"/>
+          <rect x="222" y="140" width="156" height="48" rx="14" fill="#2E3538"/>
+          <circle cx="252" cy="190" r="15" fill="#23282C"/><circle cx="252" cy="190" r="6" fill="#9AA5A6"/>
+          <circle cx="346" cy="190" r="15" fill="#23282C"/><circle cx="346" cy="190" r="6" fill="#9AA5A6"/>
+          <!-- advisor with tablet -->
+          <circle cx="150" cy="118" r="12" fill="#C9B29A"/>
+          <rect x="134" y="132" width="32" height="52" rx="11" fill="#00AAA7"/>
+          <rect x="138" y="184" width="9" height="16" rx="3" fill="#3C4348"/>
+          <rect x="153" y="184" width="9" height="16" rx="3" fill="#3C4348"/>
+          <rect x="116" y="142" width="17" height="25" rx="3" fill="#FFFFFF" stroke="#63656A" stroke-width="2"/>
+          <circle cx="124.5" cy="154" r="3.2" fill="#00AAA7"/>
+          <!-- customer -->
+          <circle cx="70" cy="112" r="12" fill="#C9B29A"/>
+          <rect x="54" y="126" width="32" height="54" rx="11" fill="#ED6B06"/>
+          <rect x="58" y="180" width="9" height="20" rx="3" fill="#3C4348"/>
+          <rect x="73" y="180" width="9" height="20" rx="3" fill="#3C4348"/>
+          <!-- speech bubble -->
+          <rect x="26" y="28" width="188" height="46" rx="12" fill="#FFFFFF" stroke="#D4DBDE" stroke-width="2"/>
+          <polygon points="66,73 76,92 90,73" fill="#FFFFFF" stroke="#D4DBDE" stroke-width="2"/>
+          <rect x="68" y="70" width="20" height="5" fill="#FFFFFF"/>
+          <text class="de" x="120" y="57" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700" fill="#23282C">Klopfen ab 100 km/h!</text>
+          <text class="en" x="120" y="57" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700" fill="#23282C">Knocking at 100 km/h!</text>
+        </svg>
+        <figcaption>
+          <span class="num">1</span>
+          <div>
+            <span class="de"><b>Die Annahme.</b> Sabine meldet das Klopfen — servMate hält es per Sprache-zu-Text im Wortlaut fest.</span>
+            <span class="en"><b>Check-in.</b> Sabine reports the knocking — servMate captures it verbatim via speech-to-text.</span>
+          </div>
+        </figcaption>
+      </figure>
+
+      <!-- SCENE 2: Reise -->
+      <figure class="scene reveal d2">
+        <svg viewBox="0 0 400 250" role="img" aria-label="Die Reise der Beanstandung / The complaint's journey">
+          <line x1="80" y1="150" x2="200" y2="90" stroke="#C6CDD0" stroke-width="5" stroke-linecap="round"/>
+          <line x1="200" y1="90" x2="320" y2="150" stroke="#C6CDD0" stroke-width="5" stroke-linecap="round"/>
+          <line class="flow" x1="80" y1="150" x2="200" y2="90" stroke="#00AAA7" stroke-width="5" stroke-linecap="round"/>
+          <line class="flow" x1="200" y1="90" x2="320" y2="150" stroke="#ED6B06" stroke-width="5" stroke-linecap="round"/>
+          <!-- node 1: servMate (mic) -->
+          <circle cx="80" cy="150" r="24" fill="#00AAA7"/>
+          <rect x="75" y="139" width="10" height="15" rx="5" fill="#FFFFFF"/>
+          <line x1="80" y1="156" x2="80" y2="163" stroke="#FFFFFF" stroke-width="2.5"/>
+          <line x1="73" y1="163" x2="87" y2="163" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="80" y="196" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#23282C">servMate</text>
+          <!-- node 2: DMS (ring) -->
+          <circle cx="200" cy="90" r="19" fill="#FFFFFF" stroke="#63656A" stroke-width="7"/>
+          <text class="de" x="200" y="52" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#23282C">Auftrag · DMS</text>
+          <text class="en" x="200" y="52" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#23282C">Order · DMS</text>
+          <!-- node 3: techMate (checklist) -->
+          <circle cx="320" cy="150" r="24" fill="#ED6B06"/>
+          <rect x="312" y="138" width="16" height="23" rx="3" fill="#FFFFFF"/>
+          <line x1="316" y1="146" x2="325" y2="146" stroke="#ED6B06" stroke-width="2.4" stroke-linecap="round"/>
+          <line x1="316" y1="152" x2="325" y2="152" stroke="#ED6B06" stroke-width="2.4" stroke-linecap="round"/>
+          <line x1="316" y1="158" x2="322" y2="158" stroke="#ED6B06" stroke-width="2.4" stroke-linecap="round"/>
+          <text x="320" y="196" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#23282C">techMate</text>
+          <!-- message chip -->
+          <rect x="88" y="98" width="106" height="26" rx="13" fill="#FFFFFF" stroke="#00AAA7" stroke-width="2"/>
+          <text x="141" y="115" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" font-weight="600" fill="#23282C">„…100 km/h…"</text>
+        </svg>
+        <figcaption>
+          <span class="num">2</span>
+          <div>
+            <span class="de"><b>Die Reise.</b> Der Satz reist ohne Abtippen weiter: servMate → Auftrag im DMS → techMate.</span>
+            <span class="en"><b>The journey.</b> The sentence travels on without retyping: servMate → order in the DMS → techMate.</span>
+          </div>
+        </figcaption>
+      </figure>
+
+      <!-- SCENE 3: Werkstatt -->
+      <figure class="scene reveal d1">
+        <svg viewBox="0 0 400 250" role="img" aria-label="Werkstatt / Workshop">
+          <line x1="20" y1="200" x2="380" y2="200" stroke="#DDE4E6" stroke-width="3" stroke-linecap="round"/>
+          <!-- lift -->
+          <rect x="96" y="70" width="12" height="112" rx="3" fill="#9AA5A6"/>
+          <rect x="286" y="70" width="12" height="112" rx="3" fill="#9AA5A6"/>
+          <rect x="76" y="176" width="242" height="10" rx="4" fill="#63656A"/>
+          <!-- car on lift -->
+          <rect x="150" y="100" width="90" height="42" rx="12" fill="#3C4348"/>
+          <rect x="160" y="107" width="30" height="22" rx="5" fill="#AEC3C6"/>
+          <rect x="196" y="107" width="30" height="22" rx="5" fill="#AEC3C6"/>
+          <rect x="128" y="124" width="140" height="40" rx="12" fill="#2E3538"/>
+          <circle cx="156" cy="165" r="12" fill="#23282C"/><circle cx="156" cy="165" r="5" fill="#9AA5A6"/>
+          <circle cx="240" cy="165" r="12" fill="#23282C"/><circle cx="240" cy="165" r="5" fill="#9AA5A6"/>
+          <!-- open trunk lid -->
+          <line x1="262" y1="126" x2="296" y2="94" stroke="#3C4348" stroke-width="8" stroke-linecap="round"/>
+          <!-- technician -->
+          <circle cx="336" cy="120" r="12" fill="#C9B29A"/>
+          <rect x="320" y="134" width="32" height="48" rx="11" fill="#00AAA7"/>
+          <rect x="324" y="182" width="9" height="18" rx="3" fill="#3C4348"/>
+          <rect x="339" y="182" width="9" height="18" rx="3" fill="#3C4348"/>
+          <line x1="324" y1="144" x2="300" y2="122" stroke="#00AAA7" stroke-width="8" stroke-linecap="round"/>
+          <line x1="300" y1="118" x2="292" y2="132" stroke="#63656A" stroke-width="5" stroke-linecap="round"/>
+          <!-- speech bubble -->
+          <rect x="226" y="24" width="158" height="46" rx="12" fill="#FFFFFF" stroke="#D4DBDE" stroke-width="2"/>
+          <polygon points="330,69 340,88 352,69" fill="#FFFFFF" stroke="#D4DBDE" stroke-width="2"/>
+          <rect x="332" y="66" width="18" height="5" fill="#FFFFFF"/>
+          <circle cx="248" cy="47" r="10" fill="#00AAA7"/>
+          <path d="M 243 47 l 4 4 l 8 -9" stroke="#FFFFFF" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text class="de" x="318" y="52" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#23282C">Abdeckung lose!</text>
+          <text class="en" x="318" y="52" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#23282C">Cover loose!</text>
+        </svg>
+        <figcaption>
+          <span class="num">3</span>
+          <div>
+            <span class="de"><b>Die Werkstatt.</b> Michael findet die Ursache: Die Kofferraumabdeckung war nicht richtig montiert. Der Diagnose-Assistent lernt mit.</span>
+            <span class="en"><b>The workshop.</b> Michael finds the cause: the trunk cover wasn't mounted properly. The diagnosis assistant learns along.</span>
+          </div>
+        </figcaption>
+      </figure>
+
+      <!-- SCENE 4: Abholung -->
+      <figure class="scene reveal d2">
+        <svg viewBox="0 0 400 250" role="img" aria-label="Abholung / Pickup">
+          <line x1="20" y1="200" x2="380" y2="200" stroke="#DDE4E6" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="372" cy="30" r="16" fill="#ED6B06" opacity=".85"/>
+          <!-- motion lines -->
+          <line x1="40" y1="150" x2="104" y2="150" stroke="#C6CDD0" stroke-width="6" stroke-linecap="round"/>
+          <line x1="52" y1="166" x2="100" y2="166" stroke="#C6CDD0" stroke-width="6" stroke-linecap="round"/>
+          <line x1="64" y1="182" x2="96" y2="182" stroke="#C6CDD0" stroke-width="6" stroke-linecap="round"/>
+          <!-- car -->
+          <rect x="205" y="112" width="104" height="50" rx="14" fill="#3C4348"/>
+          <rect x="216" y="120" width="38" height="26" rx="6" fill="#AEC3C6"/>
+          <rect x="260" y="120" width="38" height="26" rx="6" fill="#AEC3C6"/>
+          <rect x="182" y="140" width="156" height="48" rx="14" fill="#2E3538"/>
+          <circle cx="212" cy="190" r="15" fill="#23282C"/><circle cx="212" cy="190" r="6" fill="#9AA5A6"/>
+          <circle cx="306" cy="190" r="15" fill="#23282C"/><circle cx="306" cy="190" r="6" fill="#9AA5A6"/>
+          <!-- check badge -->
+          <circle cx="240" cy="60" r="20" fill="#00AAA7"/>
+          <path d="M 230 60 l 7 7 l 13 -15" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text class="de" x="272" y="66" font-family="Segoe UI, sans-serif" font-size="17" font-weight="700" font-style="italic" fill="#23282C">still.</text>
+          <text class="en" x="272" y="66" font-family="Segoe UI, sans-serif" font-size="17" font-weight="700" font-style="italic" fill="#23282C">silent.</text>
+        </svg>
+        <figcaption>
+          <span class="num">4</span>
+          <div>
+            <span class="de"><b>Die Abholung.</b> Es bleibt still. Sabine zahlt 1.500&nbsp;€ — und kommt wieder.</span>
+            <span class="en"><b>Pickup.</b> It stays silent. Sabine pays €1,500 — and comes back.</span>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT 1: ANNAHME -->
+<section class="band split">
+  <div class="wrap">
+    <div class="split-head">
+      <p class="eyebrow reveal"><span class="de">Moment 1 — Die Annahme</span><span class="en">Moment 1 — Check-in</span></p>
+      <h2 class="reveal d1" style="max-width:26ch;">
+        <span class="de">Wo die Beanstandung heute stirbt — und wo sie jetzt lebt.</span>
+        <span class="en">Where the complaint dies today — and where it now lives.</span>
+      </h2>
+    </div>
+    <div class="split-grid">
+      <div class="frueher reveal d1">
+        <div class="col-head"><span class="dot"></span><span class="de">Früher · Kugelschreiber</span><span class="en">Before · Ballpoint pen</span></div>
+        <div class="panel bad">
+          <div class="note-card">
+            <div class="scrawl">
+              <span class="de">Klopfen Kofferr.<br><span class="l2">100kmh ?</span></span>
+              <span class="en">knocking trunk?<br><span class="l2">100 kph ?</span></span>
+            </div>
+          </div>
+          <h3><span class="de">Niemand kann die Handschrift entziffern.</span><span class="en">No one can decipher the handwriting.</span></h3>
+          <p class="note">
+            <span class="de">Die Notiz landet zwischen 20 Häkchen auf der Papier-Checkliste.
+              In der Halle liest sie keiner — die Beanstandung ist tot, bevor der Wagen auf der Hebebühne steht.</span>
+            <span class="en">The note ends up between 20 checkmarks on the paper checklist.
+              Nobody on the shop floor reads it — the complaint is dead before the car is on the lift.</span>
+          </p>
+        </div>
+      </div>
+      <div class="jetzt reveal d2">
+        <div class="col-head"><span class="dot"></span><span class="de">Jetzt · servMate</span><span class="en">Now · servMate</span></div>
+        <div class="panel good">
+          <div class="app-card">
+            <div class="app-bar"><span class="mic" aria-hidden="true">●</span>
+              <span class="de">servMate · Sprache&nbsp;→&nbsp;Text</span><span class="en">servMate · Speech&nbsp;→&nbsp;text</span></div>
+            <div class="app-body">
+              <p class="transcript">
+                <span class="de">„Kunde beanstandet <span class="hl">Klopfgeräusch aus dem Kofferraum ab ca. 100&nbsp;km/h</span>."</span>
+                <span class="en">"Customer reports a <span class="hl">knocking noise from the trunk from approx. 100&nbsp;km/h</span>."</span>
+              </p>
+              <div class="chips">
+                <span class="chip"><span class="de">am Auftrag</span><span class="en">on the order</span></span>
+                <span class="chip"><span class="de">im DMS</span><span class="en">in the DMS</span></span>
+                <span class="chip"><span class="de">am techMate</span><span class="en">on techMate</span></span>
+              </div>
+            </div>
+          </div>
+          <h3><span class="de">Im Wortlaut festgehalten. Für alle sichtbar.</span><span class="en">Captured verbatim. Visible to everyone.</span></h3>
+          <p class="note">
+            <span class="de">Der Serviceberater diktiert die Beanstandung. Speech-to-Text hält sie unmissverständlich
+              fest — und hängt sie ab Sekunde eins an den Auftrag.</span>
+            <span class="en">The service advisor dictates the complaint. Speech-to-text captures it unambiguously —
+              attached to the order from second one.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section class="band pipeline-sec">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow reveal"><span class="de">Die Reise der Beanstandung</span><span class="en">The complaint's journey</span></p>
+      <h2 class="reveal d1">
+        <span class="de">Die eine Zeile, die früher auf einem Zettel starb, reist jetzt durch drei Systeme.</span>
+        <span class="en">The one line that used to die on a slip of paper now travels through three systems.</span>
+      </h2>
+      <p class="lead reveal d2" style="margin-top:18px; color:var(--dark-body)">
+        <span class="de">Ohne ein einziges Mal abgetippt oder neu interpretiert zu werden.</span>
+        <span class="en">Without being retyped or reinterpreted a single time.</span>
+      </p>
+    </div>
+    <div class="pipe reveal d1" id="pipe">
+      <div class="sweep" aria-hidden="true"></div>
+      <div class="node n1"><div class="badge">01</div><div class="k">servMate</div>
+        <div class="t"><span class="de">Sprache → Text</span><span class="en">Speech → text</span></div>
+        <div class="d"><span class="de">Der Serviceberater diktiert die Beanstandung bei der Annahme.</span>
+          <span class="en">The service advisor dictates the complaint at check-in.</span></div></div>
+      <div class="node n2"><div class="badge">02</div>
+        <div class="k"><span class="de">Auftrag · DMS</span><span class="en">Order · DMS</span></div>
+        <div class="t"><span class="de">Fest am Auftrag</span><span class="en">Fixed to the order</span></div>
+        <div class="d"><span class="de">Die Beanstandung liegt im Dealer-Management-System — der zentralen Wahrheit des Autohauses.</span>
+          <span class="en">The complaint lives in the dealer management system — the dealership's single source of truth.</span></div></div>
+      <div class="node n3"><div class="badge">03</div><div class="k">techMate</div>
+        <div class="t"><span class="de">To-Do beim Techniker</span><span class="en">A to-do for the technician</span></div>
+        <div class="d"><span class="de">Michael sieht nicht nur „Service", sondern die klare Aufgabe: das Klopfen finden.</span>
+          <span class="en">Michael doesn't just see "service" — he sees the clear task: find the knocking.</span></div></div>
+    </div>
+    <div class="learning reveal d2">
+      <span class="ai">✦ <span class="de">Diagnose-Assistent</span><span class="en">Diagnosis Assistant</span></span>
+      <p>
+        <span class="de">Michael findet die Ursache — <b>die Kofferraumabdeckung war nicht korrekt montiert</b> — und hält sie in techMate fest.
+          Der Diagnose-Assistent lernt dazu: Symptom „Klopfen ab 100&nbsp;km/h, EX90" ↔ Ursache „Abdeckung lose".
+          Beim nächsten Fahrzeug ist die Werkstatt in Minuten statt Stunden am Ziel.</span>
+        <span class="en">Michael finds the cause — <b>the trunk cover wasn't mounted correctly</b> — and records it in techMate.
+          The Diagnosis Assistant learns: symptom "knocking from 100&nbsp;km/h, EX90" ↔ cause "cover loose".
+          On the next vehicle, the workshop gets there in minutes instead of hours.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PAYOFF -->
+<section class="band payoff">
+  <div class="wrap">
+    <div class="price-tag reveal">
+      <p class="eyebrow" style="justify-content:center;"><span class="de">Moment 2 — Die Abholung</span><span class="en">Moment 2 — Pickup</span></p>
+      <div class="big tnum"><span class="de">1.500&nbsp;€</span><span class="en">€1,500</span></div>
+      <div class="cap"><span class="de">Gleiche Rechnung. Gegensätzliches Ergebnis.</span><span class="en">Same invoice. Opposite outcome.</span></div>
+    </div>
+    <div class="end-grid">
+      <div class="end-card bad reveal d1">
+        <div class="tag"><span class="de">Früher</span><span class="en">Before</span></div>
+        <div class="kick">
+          <span class="de">Zwei Minuten später, bei Tempo 100:<br><span class="klopf">klopf · klopf · klopf.</span></span>
+          <span class="en">Two minutes later, at 100 km/h:<br><span class="klopf">knock · knock · knock.</span></span>
+        </div>
+        <p>
+          <span class="de">Sabine zahlt, fährt vom Hof — und das Geräusch ist immer noch da. Ihre Beanstandung wurde nie bearbeitet,
+            weil die Information verloren ging. Sie ist wütend. Nicht wegen der Reparatur — weil sich niemand um ihr Anliegen gekümmert hat.
+            Bei einem 100.000-€-Auto kippt hier die Kundenbeziehung.</span>
+          <span class="en">Sabine pays, drives off — and the noise is still there. Her complaint was never addressed,
+            because the information got lost. She is angry. Not about the repair — because nobody took care of her concern.
+            On a €100,000 car, this is where the relationship tips.</span>
+        </p>
+      </div>
+      <div class="end-card good reveal d2">
+        <div class="tag"><span class="de">Jetzt</span><span class="en">Now</span></div>
+        <div class="kick"><span class="de">Es bleibt still. Sabine kommt wieder.</span><span class="en">It stays silent. Sabine comes back.</span></div>
+        <p>
+          <span class="de">Genau das, was sie gestört hat, ist erledigt — sauber dokumentiert, nachvollziehbar, mit Foto.
+            Aus einem verlorenen Kunden wird ein Botschafter. Der Unterschied war ein einziger Satz —
+            und ob er den Weg vom Empfang bis in die Halle überlebt hat.</span>
+          <span class="en">Exactly what bothered her is fixed — cleanly documented, traceable, with photos.
+            A lost customer becomes an ambassador. The difference was a single sentence —
+            and whether it survived the journey from reception to the shop floor.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- AI FEATURE: DIAGNOSE-ASSISTENT -->
+<section class="band ai-sec">
+  <div class="wrap ai-grid">
+    <div>
+      <p class="eyebrow reveal"><span class="de">✦ KI-Feature — Diagnose-Assistent</span><span class="en">✦ AI feature — Diagnosis Assistant</span></p>
+      <h2 class="reveal d1">
+        <span class="de">Drei Wochen später: ein anderer EX90, dasselbe Klopfen.</span>
+        <span class="en">Three weeks later: another EX90, the same knocking.</span>
+      </h2>
+      <p class="lead reveal d2" style="margin-top:22px;">
+        <span class="de">Diesmal sucht niemand stundenlang. Der Diagnose-Assistent hat aus Michaels Fall gelernt —
+          und schlägt die wahrscheinliche Ursache in Sekunden vor.</span>
+        <span class="en">This time nobody searches for hours. The Diagnosis Assistant has learned from Michael's case —
+          and suggests the probable cause within seconds.</span>
+      </p>
+      <ul class="ai-feats reveal d2">
+        <li><span class="de"><b>Lernt aus jedem dokumentierten Fall.</b> Jede bestätigte Ursache wird Wissen — markenübergreifend, über alle Standorte.</span>
+          <span class="en"><b>Learns from every documented case.</b> Every confirmed cause becomes knowledge — across brands and locations.</span></li>
+        <li><span class="de"><b>Schlägt Ursachen vor, statt suchen zu lassen.</b> Symptom am techMate eingeben, wahrscheinliche Ursachen mit Konfidenz erhalten.</span>
+          <span class="en"><b>Suggests causes instead of leaving you searching.</b> Enter a symptom on techMate and get probable causes with confidence scores.</span></li>
+        <li><span class="de"><b>Das Wissen bleibt im Autohaus.</b> Auch wenn der erfahrenste Techniker in Rente geht — seine Diagnosen bleiben.</span>
+          <span class="en"><b>The knowledge stays in the dealership.</b> Even when your most experienced technician retires — his diagnoses remain.</span></li>
+      </ul>
+    </div>
+    <div class="reveal d2">
+      <div class="ai-mock">
+        <div class="bar"><span class="spark" aria-hidden="true">✦</span>
+          <span class="de">techMate · Diagnose-Assistent</span><span class="en">techMate · Diagnosis Assistant</span></div>
+        <div class="bd">
+          <div class="lbl">Symptom</div>
+          <p class="sym">
+            <span class="de">„Klopfgeräusch aus dem Kofferraum ab ca. 100&nbsp;km/h" · Volvo EX90</span>
+            <span class="en">"Knocking noise from the trunk from approx. 100&nbsp;km/h" · Volvo EX90</span>
+          </p>
+          <div class="ai-answer">
+            <div class="lbl" style="color:var(--teal-dk)"><span class="de">Wahrscheinliche Ursache</span><span class="en">Probable cause</span></div>
+            <div class="cause"><span class="de">Kofferraumabdeckung nicht korrekt montiert</span><span class="en">Trunk cover not mounted correctly</span></div>
+            <div class="conf" aria-hidden="true"><span></span></div>
+            <div class="conf-row"><span><span class="de">Konfidenz</span><span class="en">Confidence</span></span><span class="tnum">87&nbsp;%</span></div>
+          </div>
+          <p class="ai-src">
+            <span class="de">Gelernt aus 3 dokumentierten Fällen · zuletzt: Auftrag A-2417 (EX90)</span>
+            <span class="en">Learned from 3 documented cases · most recent: order A-2417 (EX90)</span>
+          </p>
+          <span class="mini-btn"><span class="de">Als To-Do übernehmen</span><span class="en">Add as to-do</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSPECTIVES -->
+<section class="band persp" id="produkte">
+  <div class="wrap">
+    <p class="eyebrow reveal"><span class="de">Drei Perspektiven, ein Fluss</span><span class="en">Three perspectives, one flow</span></p>
+    <h2 class="reveal d1">
+      <span class="de">Dieselbe Wahrheit — für jede Rolle im Autohaus.</span>
+      <span class="en">The same truth — for every role in the dealership.</span>
+    </h2>
+    <p class="intro lead reveal d2">
+      <span class="de">Jede Rolle sieht genau, was sie braucht. Und alle sehen dasselbe:
+        vom ersten diktierten Satz bis zur zufriedenen Abholung.</span>
+      <span class="en">Every role sees exactly what it needs. And everyone sees the same thing:
+        from the first dictated sentence to a happy pickup.</span>
+    </p>
+    <div class="cards">
+      <div class="pcard reveal d1">
+        <span class="role"><span class="de">Serviceberater</span><span class="en">Service advisor</span></span>
+        <div class="pname"><b>serv</b>Mate</div>
+        <p class="claim"><span class="de">„Serviceannahme auf Augenhöhe."</span><span class="en">"Service check-in at eye level."</span></p>
+        <span class="ai-chip">✦&nbsp;<span class="de">KI: History-Assistent</span><span class="en">AI: History Assistant</span></span>
+        <ul>
+          <li><span class="de">Digitale Annahme am iPad mini — mit dem Kunden am Fahrzeug</span>
+            <span class="en">Digital check-in on iPad mini — with the customer at the vehicle</span></li>
+          <li><span class="de">Beanstandungen per Speech-to-Text im Wortlaut</span>
+            <span class="en">Complaints captured verbatim via speech-to-text</span></li>
+          <li><span class="de">Checkliste, Foto- &amp; Videodoku, Auftragserweiterung</span>
+            <span class="en">Checklists, photo &amp; video documentation, order extensions</span></li>
+          <li><span class="de">Digitale Bestätigung &amp; History-Assistent</span>
+            <span class="en">Digital sign-off &amp; history assistant</span></li>
+        </ul>
+      </div>
+      <div class="pcard reveal d2">
+        <span class="role"><span class="de">Techniker</span><span class="en">Technician</span></span>
+        <div class="pname"><b>tech</b>Mate</div>
+        <p class="claim"><span class="de">„Der Werkstattplatz, der mitdenkt."</span><span class="en">"The workshop workplace that thinks along."</span></p>
+        <span class="ai-chip">✦&nbsp;<span class="de">KI: Diagnose-Assistent</span><span class="en">AI: Diagnosis Assistant</span></span>
+        <ul>
+          <li><span class="de">Klarer Auftrag inkl. Beanstandung als To-Do</span>
+            <span class="en">A clear order incl. the complaint as a to-do</span></li>
+          <li><span class="de">Ein aktiver Job, saubere Zeiterfassung</span>
+            <span class="en">One active job, clean time tracking</span></li>
+          <li><span class="de">Ursache dokumentieren — direkt am Fahrzeug</span>
+            <span class="en">Document the cause — right at the vehicle</span></li>
+          <li><span class="de">Diagnose-Assistent, der aus jedem Fall lernt</span>
+            <span class="en">A diagnosis assistant that learns from every case</span></li>
+        </ul>
+      </div>
+      <div class="pcard reveal d3">
+        <span class="role"><span class="de">Werkstattleitung</span><span class="en">Workshop management</span></span>
+        <div class="pname"><span class="de">Leitstand</span><span class="en">Workshop Controller</span></div>
+        <p class="claim"><span class="de">„Die ganze Werkstatt auf einen Blick."</span><span class="en">"The whole workshop at a glance."</span></p>
+        <ul>
+          <li><span class="de">Auslastung &amp; Kapazitäten in Echtzeit</span>
+            <span class="en">Utilization &amp; capacity in real time</span></li>
+          <li><span class="de">Aufträge steuern statt auf Zuruf umplanen</span>
+            <span class="en">Steer orders instead of replanning on shouted requests</span></li>
+          <li><span class="de">Offene Beanstandungen bleiben sichtbar</span>
+            <span class="en">Open complaints stay visible</span></li>
+          <li><span class="de">Fertig heißt: wirklich erledigt</span>
+            <span class="en">Done means: actually done</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="band closing" id="kontakt">
+  <div class="wrap">
+    <p class="eyebrow reveal" style="justify-content:center;">movec MATES</p>
+    <h2 class="reveal d1">
+      <span class="de">Eine Beanstandung. Eine Wahrheit.<br>Vom Empfang bis zur Abholung.</span>
+      <span class="en">One complaint. One truth.<br>From reception to pickup.</span>
+    </h2>
+    <p class="thesis reveal d2">
+      <span class="de">servMate hört sie. Der Auftrag trägt sie. techMate erledigt sie.
+        Der Diagnose-Assistent merkt sie sich. So wird aus jedem Werkstattbesuch ein Grund wiederzukommen.</span>
+      <span class="en">servMate hears it. The order carries it. techMate resolves it.
+        The Diagnosis Assistant remembers it. Every workshop visit becomes a reason to come back.</span>
+    </p>
+    <div class="btnrow reveal d2">
+      <a class="btn solid" href="#"><span class="de">Live-Demo anfragen</span><span class="en">Request a live demo</span></a>
+      <a class="btn ghost-dk" href="#produkte"><span class="de">Die MATES-Suite entdecken</span><span class="en">Discover the MATES suite</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="logo on-dark" href="#top" aria-label="movec">
+      <svg class="mark-full" viewBox="110 134 1360 440" width="124" height="40" style="--lg:#C9D4D3" role="img"><use href="#mv-logo"/></svg>
+    </a>
+    <span class="prods">servMate · techMate · <span class="de">Leitstand</span><span class="en">Workshop Controller</span></span>
+    <span><span class="de">Pitch-Prototyp — Storytelling-Konzept</span><span class="en">Pitch prototype — storytelling concept</span></span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    /* ----- language toggle ----- */
+    var btnDe = document.getElementById('btn-de');
+    var btnEn = document.getElementById('btn-en');
+    function setLang(l) {
+      var en = l === 'en';
+      document.body.classList.toggle('en', en);
+      document.documentElement.lang = en ? 'en' : 'de';
+      btnDe.classList.toggle('active', !en);
+      btnEn.classList.toggle('active', en);
+      btnDe.setAttribute('aria-pressed', String(!en));
+      btnEn.setAttribute('aria-pressed', String(en));
+      try { localStorage.setItem('mates-lang', l); } catch (e) {}
+    }
+    btnDe.addEventListener('click', function () { setLang('de'); });
+    btnEn.addEventListener('click', function () { setLang('en'); });
+    try {
+      var saved = localStorage.getItem('mates-lang');
+      if (saved === 'en') setLang('en');
+    } catch (e) {}
+
+    /* ----- scroll reveals ----- */
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (!('IntersectionObserver' in window) || reduce) {
+      els.forEach(function (e) { e.classList.add('in'); });
+      var p = document.getElementById('pipe'); if (p) p.classList.add('play');
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          if (en.target.id === 'pipe') en.target.classList.add('play');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function (e) { io.observe(e); });
+    var pipe = document.getElementById('pipe'); if (pipe) io.observe(pipe);
+  })();
+</script>
+
+</body>
+</html>
