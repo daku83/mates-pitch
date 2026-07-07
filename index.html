@@ -270,6 +270,13 @@
   .conf-row { display: flex; justify-content: space-between; font-size: .78rem; font-weight: 600; color: var(--muted); margin-top: 6px; }
   .ai-src { font-size: .82rem; color: var(--muted); margin-top: 14px; }
   .mini-btn { display: inline-block; margin-top: 16px; font-size: .82rem; font-weight: 700; color: #fff; background: var(--orange); padding: 9px 16px; border-radius: 7px; }
+  .diag-h3 { margin-top: 76px; }
+  .diag-strip { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: 26px; }
+  .diag-strip .scene figcaption { padding: 14px 16px 16px; font-size: .86rem; }
+  .cap-tag { flex: none; font-size: .62rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; margin-top: 2px; }
+  .cap-tag.f { color: var(--red); border: 1px solid rgba(201,75,51,.35); background: rgba(201,75,51,.07); }
+  .cap-tag.j { color: var(--teal-dk); border: 1px solid var(--teal); background: var(--teal-soft); }
+  .scene.now { border-color: var(--teal); box-shadow: 0 14px 40px rgba(0,170,167,.14); }
 
   /* ---------- PERSPECTIVES ---------- */
   .persp { background: var(--paper-2); }
@@ -305,6 +312,7 @@
 
   @media (max-width: 860px) {
     .stakes .wrap, .split-grid, .end-grid, .strip, .ai-grid { grid-template-columns: 1fr; gap: 30px; }
+    .diag-strip { grid-template-columns: 1fr; gap: 22px; }
     .pipe { grid-template-columns: 1fr; gap: 30px; }
     .pipe::before, .pipe .sweep { display: none; }
     .cards { grid-template-columns: 1fr; }
@@ -348,7 +356,7 @@
         <button type="button" id="btn-de" class="active" aria-pressed="true">DE</button>
         <button type="button" id="btn-en" aria-pressed="false">EN</button>
       </div>
-      <a class="btn solid" href="#kontakt"><span class="de">Demo anfragen</span><span class="en">Request a demo</span></a>
+      <a class="btn solid" href="https://daku83.github.io/techmate-demo/" target="_blank" rel="noopener"><span class="de">Live-Demo</span><span class="en">Live demo</span></a>
     </div>
   </div>
 </nav>
@@ -383,7 +391,7 @@
         They are three perspectives on the same job — from reception to pickup.</span>
     </p>
     <div class="btnrow reveal d2">
-      <a class="btn solid" href="#kontakt"><span class="de">Live-Demo anfragen</span><span class="en">Request a live demo</span></a>
+      <a class="btn solid" href="https://daku83.github.io/techmate-demo/" target="_blank" rel="noopener"><span class="de">Live-Demo öffnen</span><span class="en">Open live demo</span></a>
       <a class="btn ghost" href="#story"><span class="de">Die Geschichte ansehen</span><span class="en">See the story</span></a>
     </div>
     <div class="signal reveal d3">
@@ -816,6 +824,115 @@
       </div>
     </div>
   </div>
+  <div class="wrap">
+    <h3 class="reveal diag-h3"><span class="de">Derselbe Job — früher und jetzt.</span><span class="en">The same job — before and now.</span></h3>
+    <div class="diag-strip">
+
+      <!-- FRÜHER 1: Suche im DMS / in Systemen -->
+      <figure class="scene reveal d1">
+        <svg viewBox="0 0 300 220" role="img" aria-label="Suche im DMS / Searching the DMS">
+          <line x1="20" y1="175" x2="280" y2="175" stroke="#DDE4E6" stroke-width="3" stroke-linecap="round"/>
+          <rect x="130" y="140" width="140" height="8" rx="3" fill="#9AA5A6"/>
+          <rect x="140" y="148" width="8" height="27" fill="#9AA5A6"/><rect x="252" y="148" width="8" height="27" fill="#9AA5A6"/>
+          <rect x="165" y="70" width="88" height="58" rx="6" fill="#3C4348"/>
+          <rect x="172" y="77" width="74" height="44" rx="3" fill="#AEC3C6"/>
+          <rect x="178" y="84" width="40" height="5" rx="2" fill="#FFFFFF"/>
+          <rect x="178" y="94" width="52" height="5" rx="2" fill="#FFFFFF"/>
+          <rect x="178" y="104" width="34" height="5" rx="2" fill="#FFFFFF"/>
+          <circle cx="230" cy="98" r="9" fill="none" stroke="#63656A" stroke-width="3.5"/>
+          <line x1="236" y1="105" x2="244" y2="113" stroke="#63656A" stroke-width="3.5" stroke-linecap="round"/>
+          <rect x="203" y="128" width="10" height="12" fill="#3C4348"/>
+          <circle cx="90" cy="92" r="11" fill="#C9B29A"/>
+          <rect x="75" y="105" width="30" height="42" rx="10" fill="#00AAA7"/>
+          <line x1="102" y1="118" x2="128" y2="134" stroke="#00AAA7" stroke-width="7" stroke-linecap="round"/>
+          <rect x="72" y="147" width="26" height="28" rx="8" fill="#3C4348"/>
+          <circle cx="52" cy="45" r="15" fill="#FFFFFF" stroke="#63656A" stroke-width="3"/>
+          <line x1="52" y1="45" x2="52" y2="36" stroke="#63656A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="52" y1="45" x2="60" y2="49" stroke="#63656A" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="262" y="58" font-family="Segoe UI, sans-serif" font-size="26" font-weight="800" fill="#C94B33">?</text>
+        </svg>
+        <figcaption>
+          <span class="cap-tag f"><span class="de">Früher</span><span class="en">Before</span></span>
+          <div><span class="de">Suchen im DMS und in verschiedenen Systemen — Fenster für Fenster, Maske für Maske.</span>
+            <span class="en">Searching the DMS and separate systems — window by window, screen by screen.</span></div>
+        </figcaption>
+      </figure>
+
+      <!-- FRÜHER 2: Suche in alten Aufträgen -->
+      <figure class="scene reveal d2">
+        <svg viewBox="0 0 300 220" role="img" aria-label="Suche in alten Aufträgen / Digging through past orders">
+          <line x1="20" y1="175" x2="280" y2="175" stroke="#DDE4E6" stroke-width="3" stroke-linecap="round"/>
+          <rect x="40" y="142" width="80" height="33" rx="4" fill="#D4DBDE"/>
+          <rect x="36" y="132" width="88" height="14" rx="4" fill="#C2CBCE"/>
+          <rect x="52" y="100" width="60" height="28" rx="3" fill="#E9EDEF" stroke="#C2CBCE" stroke-width="2"/>
+          <rect x="58" y="88" width="60" height="28" rx="3" fill="#F4F6F7" stroke="#C2CBCE" stroke-width="2" transform="rotate(-6 58 88)"/>
+          <circle cx="205" cy="78" r="11" fill="#C9B29A"/>
+          <rect x="190" y="91" width="30" height="50" rx="10" fill="#00AAA7"/>
+          <rect x="196" y="141" width="8" height="34" rx="3" fill="#3C4348"/><rect x="208" y="141" width="8" height="34" rx="3" fill="#3C4348"/>
+          <line x1="192" y1="102" x2="168" y2="112" stroke="#00AAA7" stroke-width="7" stroke-linecap="round"/>
+          <rect x="146" y="98" width="26" height="34" rx="2" fill="#FFFFFF" stroke="#C2CBCE" stroke-width="2" transform="rotate(-8 146 98)"/>
+          <line x1="149" y1="110" x2="164" y2="108" stroke="#C2CBCE" stroke-width="2"/>
+          <line x1="150" y1="117" x2="165" y2="115" stroke="#C2CBCE" stroke-width="2"/>
+          <text x="238" y="55" font-family="Segoe UI, sans-serif" font-size="26" font-weight="800" fill="#C94B33">?</text>
+          <text x="258" y="88" font-family="Segoe UI, sans-serif" font-size="18" font-weight="800" fill="#C94B33" opacity=".65">?</text>
+        </svg>
+        <figcaption>
+          <span class="cap-tag f"><span class="de">Früher</span><span class="en">Before</span></span>
+          <div><span class="de">Alte Aufträge und Akten durchblättern: Hatten wir das nicht schon einmal?</span>
+            <span class="en">Digging through past orders and files: haven't we seen this before?</span></div>
+        </figcaption>
+      </figure>
+
+      <!-- FRÜHER 3: Suche direkt am Fahrzeug -->
+      <figure class="scene reveal d3">
+        <svg viewBox="0 0 300 220" role="img" aria-label="Suche am Fahrzeug / Searching on the vehicle">
+          <line x1="20" y1="175" x2="280" y2="175" stroke="#DDE4E6" stroke-width="3" stroke-linecap="round"/>
+          <rect x="95" y="78" width="82" height="36" rx="10" fill="#3C4348"/>
+          <rect x="105" y="84" width="26" height="20" rx="4" fill="#AEC3C6"/><rect x="137" y="84" width="26" height="20" rx="4" fill="#AEC3C6"/>
+          <rect x="75" y="98" width="126" height="38" rx="11" fill="#2E3538"/>
+          <circle cx="102" cy="138" r="12" fill="#23282C"/><circle cx="102" cy="138" r="5" fill="#9AA5A6"/>
+          <circle cx="172" cy="138" r="12" fill="#23282C"/><circle cx="172" cy="138" r="5" fill="#9AA5A6"/>
+          <line x1="196" y1="100" x2="222" y2="74" stroke="#3C4348" stroke-width="7" stroke-linecap="round"/>
+          <polygon points="240,116 204,102 204,130" fill="rgba(237,107,6,.28)"/>
+          <circle cx="252" cy="98" r="10" fill="#C9B29A"/>
+          <rect x="238" y="110" width="28" height="34" rx="10" fill="#00AAA7"/>
+          <rect x="240" y="144" width="26" height="10" rx="4" fill="#3C4348"/>
+          <text x="210" y="58" font-family="Segoe UI, sans-serif" font-size="26" font-weight="800" fill="#C94B33">?</text>
+        </svg>
+        <figcaption>
+          <span class="cap-tag f"><span class="de">Früher</span><span class="en">Before</span></span>
+          <div><span class="de">Suche direkt am Fahrzeug — Probefahrt, ausbauen, probieren, wieder einbauen.</span>
+            <span class="en">Searching on the vehicle itself — test drive, take apart, try, reassemble.</span></div>
+        </figcaption>
+      </figure>
+
+      <!-- JETZT: Der Agent -->
+      <figure class="scene now reveal d3">
+        <svg viewBox="0 0 300 220" role="img" aria-label="Der Agent erledigt die Suche / The agent does the searching">
+          <line x1="20" y1="175" x2="280" y2="175" stroke="#DDE4E6" stroke-width="3" stroke-linecap="round"/>
+          <rect x="90" y="40" width="104" height="135" rx="12" fill="#FFFFFF" stroke="#63656A" stroke-width="3"/>
+          <rect x="98" y="48" width="88" height="20" rx="6" fill="#00AAA7"/>
+          <text x="106" y="63" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">✦ techMate</text>
+          <circle cx="108" cy="86" r="5" fill="#00AAA7"/><rect x="120" y="82" width="58" height="7" rx="3" fill="#D4DBDE"/>
+          <circle cx="108" cy="104" r="5" fill="#00AAA7"/><rect x="120" y="100" width="48" height="7" rx="3" fill="#D4DBDE"/>
+          <circle cx="108" cy="122" r="5" fill="#00AAA7"/><rect x="120" y="118" width="54" height="7" rx="3" fill="#D4DBDE"/>
+          <rect x="100" y="138" width="84" height="26" rx="7" fill="rgba(237,107,6,.12)" stroke="#ED6B06" stroke-width="2"/>
+          <text class="de" x="109" y="155" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#D45F04">✓ Ursache gefunden</text>
+          <text class="en" x="115" y="155" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#D45F04">✓ Cause found</text>
+          <text x="210" y="90" font-family="Segoe UI, sans-serif" font-size="34" font-weight="800" fill="#ED6B06">4 s</text>
+          <text x="216" y="52" font-family="Segoe UI, sans-serif" font-size="18" fill="#00AAA7">✦</text>
+          <text x="248" y="118" font-family="Segoe UI, sans-serif" font-size="13" fill="#ED6B06">✦</text>
+          <text x="62" y="60" font-family="Segoe UI, sans-serif" font-size="14" fill="#00AAA7">✦</text>
+        </svg>
+        <figcaption>
+          <span class="cap-tag j"><span class="de">Jetzt</span><span class="en">Now</span></span>
+          <div><span class="de">Ein Agent erledigt genau diesen Job — in wenigen Sekunden, direkt am techMate.</span>
+            <span class="en">An agent does exactly this job — within seconds, right on techMate.</span></div>
+        </figcaption>
+      </figure>
+
+    </div>
+  </div>
 </section>
 
 <!-- PERSPECTIVES -->
@@ -899,7 +1016,7 @@
         The Diagnosis Assistant remembers it. Every workshop visit becomes a reason to come back.</span>
     </p>
     <div class="btnrow reveal d2">
-      <a class="btn solid" href="#"><span class="de">Live-Demo anfragen</span><span class="en">Request a live demo</span></a>
+      <a class="btn solid" href="https://daku83.github.io/techmate-demo/" target="_blank" rel="noopener"><span class="de">Live-Demo öffnen</span><span class="en">Open live demo</span></a>
       <a class="btn ghost-dk" href="#produkte"><span class="de">Die MATES-Suite entdecken</span><span class="en">Discover the MATES suite</span></a>
     </div>
   </div>
