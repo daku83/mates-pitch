@@ -377,11 +377,77 @@
     .pipe .sweep { display: none; }
     .flow { animation: none; }
   }
+
+  /* ---------- PDF-Export-Buttons (Nav) ---------- */
+  .pdfbar { display: flex; gap: 6px; }
+  .pdfbar button {
+    display: inline-flex; align-items: center; gap: 6px; font: inherit; font-size: .8rem; font-weight: 700;
+    padding: 7px 12px; border: 1px solid var(--line-2); border-radius: 100px; background: var(--paper);
+    color: var(--body); cursor: pointer; transition: border-color .15s ease, color .15s ease;
+  }
+  .pdfbar button:hover { border-color: var(--orange); color: var(--orange-dk); }
+  .pdfbar button:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+  .pdfbar button svg { width: 14px; height: 14px; flex: none; }
+  @media (max-width: 560px) { .pdfbar .plabel { display: none; } }
+
+  /* ---------- One-Pager (nur im Druck sichtbar) — DE/EN ---------- */
+  .onepager { display: none; color: var(--ink); }
+  .onepager .op-head { display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 2px solid var(--orange); padding-bottom: 7pt; }
+  .onepager .op-head svg { height: 34pt; width: auto; }
+  .onepager .op-eyebrow { font-size: 7.5pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); text-align: right; }
+  .onepager .op-product { font-size: 13pt; font-weight: 800; color: var(--ink); text-align: right; margin-top: 2pt; }
+  .onepager .op-product .pname { font-family: var(--geo); color: var(--grey-mark); }
+  .onepager .op-product .pname b { color: var(--orange); }
+  .onepager .op-claim { font-size: 19pt; font-weight: 800; letter-spacing: -.02em; line-height: 1.08; margin: 13pt 0 5pt; color: var(--ink); }
+  .onepager .op-lead { font-size: 10.5pt; line-height: 1.4; color: var(--body); max-width: 66ch; }
+  .onepager .op-facts { display: flex; gap: 8pt; margin: 13pt 0 4pt; }
+  .onepager .op-facts .f { flex: 1; border: 1px solid var(--line); border-radius: 7pt; padding: 7pt 9pt; }
+  .onepager .op-facts .n { font-size: 17pt; font-weight: 800; letter-spacing: -.02em; }
+  .onepager .op-facts .n.o { color: var(--orange); } .onepager .op-facts .n.t { color: var(--teal-dk); }
+  .onepager .op-facts .l { font-size: 7.5pt; color: var(--muted); margin-top: 1pt; }
+  .onepager .op-cols { display: grid; grid-template-columns: 1.12fr .88fr; gap: 16pt; margin-top: 11pt; }
+  .onepager .op-h { font-size: 8pt; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--teal-dk); margin: 0 0 5pt; }
+  .onepager .op-block { margin-bottom: 10pt; }
+  .onepager .op-block p { font-size: 9pt; line-height: 1.4; color: var(--body); margin: 0; }
+  .onepager .op-block b { color: var(--ink); }
+  .onepager ul.op-mods { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4pt; }
+  .onepager ul.op-mods li { font-size: 9.5pt; line-height: 1.3; padding-left: 11pt; position: relative; }
+  .onepager ul.op-mods li::before { content: ""; position: absolute; left: 0; top: .42em; width: 5pt; height: 5pt; border-radius: 1.5pt; background: var(--teal); }
+  .onepager ul.op-mods b { color: var(--ink); }
+  .onepager .op-foot { margin-top: 13pt; border-top: 1px solid var(--line); padding-top: 6pt; font-size: 8pt; color: var(--muted); display: flex; justify-content: space-between; gap: 10pt; }
+
+  /* ---------- DRUCK: PDF-Export der Seite + One-Pager (Sprachumschaltung via body.en) ---------- */
+  @media print {
+    @page { size: A4; margin: 12mm; }
+    @page deckpage { size: A4 landscape; margin: 10mm; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    html, body { background: #fff !important; }
+    .nav, .dots, .kbd-hint, .pdfbar { display: none !important; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+    .flow { animation: none !important; }
+    .pipe .node { opacity: 1 !important; }
+    .pipe .sweep { display: none !important; }
+
+    body:not(.print-onepager) .onepager { display: none !important; }
+    body:not(.print-onepager) section { page: deckpage; break-before: page; }
+    body:not(.print-onepager) section:first-of-type { break-before: auto; }
+    body:not(.print-onepager) .band { padding: 6mm 0 !important; }
+    body:not(.print-onepager) .scene,
+    body:not(.print-onepager) .pcard,
+    body:not(.print-onepager) .end-card,
+    body:not(.print-onepager) .wn-card,
+    body:not(.print-onepager) .panel,
+    body:not(.print-onepager) .fact { break-inside: avoid; }
+    body:not(.print-onepager) footer { break-before: page; }
+
+    body.print-onepager > *:not(.onepager):not(.mv-defs) { display: none !important; }
+    body.print-onepager .onepager { display: block !important; }
+  }
 </style>
 
 <!-- Offizielles movec-Logo (movec_logo_basic_bunt_grau.svg) als wiederverwendbares Symbol.
      Graue Teile nutzen var(--lg), damit sie auf dunklem Grund aufgehellt werden können. -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<svg class="mv-defs" width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <g id="mv-logo">
       <path d="M313.946 255.011C307.442 261.909 299.815 267.242 291.022 271.012L358.509 355.387C365.013 348.249 371.717 342.635 380.308 337.782L313.946 255.011Z" fill="var(--lg,#63656A)"/>
@@ -405,6 +471,16 @@
       <div class="lang" role="group" aria-label="Sprache / Language">
         <button type="button" id="btn-de" class="active" aria-pressed="true">DE</button>
         <button type="button" id="btn-en" aria-pressed="false">EN</button>
+      </div>
+      <div class="pdfbar">
+        <button type="button" id="pdf-deck" title="Ganze Seite als PDF / Whole page as PDF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <span class="plabel">PDF</span>
+        </button>
+        <button type="button" id="pdf-onepager" title="One-Pager als PDF / One-pager as PDF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h8"/></svg>
+          <span class="plabel"><span class="de">One-Pager</span><span class="en">One-pager</span></span>
+        </button>
       </div>
       <a class="btn solid" href="mailto:sales@movec.com?subject=movec%20MATES%20%E2%80%93%20Gespr%C3%A4ch%20vereinbaren"><span class="de">Kontakt</span><span class="en">Contact</span></a>
     </div>
@@ -829,6 +905,53 @@
   </div>
 </section>
 
+<!-- ONE-PAGER (nur im Druck: eine A4-Seite) — V2 Agentic-Fokus -->
+<div class="onepager" aria-hidden="true">
+  <div class="op-head">
+    <svg class="mark-full" viewBox="110 134 1360 440" width="150" height="48" role="img"><use href="#mv-logo"/></svg>
+    <div>
+      <div class="op-eyebrow"><span class="de">Agentic AI im Aftersales</span><span class="en">Agentic AI in aftersales</span></div>
+      <div class="op-product"><span class="pname">movec <b>MATES</b></span></div>
+    </div>
+  </div>
+
+  <h1 class="op-claim"><span class="de">Ein Agent. Kein weiteres Suchfeld.</span><span class="en">An agent. Not another search box.</span></h1>
+  <p class="op-lead"><span class="de">Die KI in den movec MATES wartet nicht auf Fragen. Sie durchsucht Historie, Aufträge und dokumentierte Fälle selbstständig — und bringt die Antwort dorthin, wo gearbeitet wird: an den Werkstattplatz.</span><span class="en">The AI in the movec MATES does not wait for questions. It searches history, orders and documented cases on its own — and delivers the answer to where the work happens: the workshop bench.</span></p>
+
+  <div class="op-facts">
+    <div class="f"><div class="n o">4 s</div><div class="l"><span class="de">bis zur Ursache (Beispiel)</span><span class="en">to the cause (example)</span></div></div>
+    <div class="f"><div class="n t">82 %</div><div class="l"><span class="de">Konfidenz (Beispielfall)</span><span class="en">confidence (example)</span></div></div>
+    <div class="f"><div class="n o">17</div><div class="l"><span class="de">Marken (Bleker: „Priorität 1")</span><span class="en">brands (Bleker: "Priority 1")</span></div></div>
+    <div class="f"><div class="n t">✦</div><div class="l"><span class="de">Diagnose-Agent</span><span class="en">diagnosis agent</span></div></div>
+  </div>
+
+  <div class="op-cols">
+    <div>
+      <div class="op-h"><span class="de">Die Suite — eine Wahrheit je Rolle</span><span class="en">The suite — one truth per role</span></div>
+      <ul class="op-mods">
+        <li><b>servMate</b> — <span class="de">Serviceberater: digitale Annahme, Beanstandung im Wortlaut, History-Assistent</span><span class="en">service advisor: digital check-in, complaint verbatim, history assistant</span></li>
+        <li><b>techMate</b> — <span class="de">Techniker: klarer Auftrag am Werkstattplatz, Diagnose-Agent, der aus jedem Fall lernt</span><span class="en">technician: a clear order at the bench, a diagnosis agent that learns from every case</span></li>
+        <li><b>Leitstand</b> <span class="de">(Workshop Controller): Auslastung in Echtzeit, Aufträge steuern statt umplanen</span><span class="en">(Workshop Controller): utilization in real time, steer orders instead of replanning</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="op-block">
+        <div class="op-h"><span class="de">Agent statt Suchfeld</span><span class="en">Agent, not a search box</span></div>
+        <p><span class="de">Klassische KI antwortet auf Fragen. Ein Agent erledigt: Symptom rein, Ursache raus. Er liest Historie und dokumentierte Fälle selbst und schlägt die wahrscheinliche Ursache vor — in Sekunden statt Stunden.</span><span class="en">Classic AI answers questions. An agent gets it done: symptom in, cause out. It reads history and documented cases itself and proposes the probable cause — in seconds instead of hours.</span></p>
+      </div>
+      <div class="op-block">
+        <div class="op-h"><span class="de">Erfahrung bleibt im Autohaus</span><span class="en">Experience stays in the dealership</span></div>
+        <p><span class="de">Beispiel: ein Startproblem, Fehlerspeicher leer. Der Agent findet aus dokumentierten Fällen zweier Standorte das korrodierte Masseband — ein Fall, den einst der heute pensionierte Meister festhielt. Sein Wissen hilft weiter.</span><span class="en">Example: an intermittent start fault, no codes stored. From documented cases across two sites the agent finds the corroded ground strap — a case once recorded by the now-retired master technician. His knowledge lives on.</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="op-foot">
+    <span>movec.com · © 2026 movec</span>
+    <span>servMate · techMate · <span class="de">Leitstand</span><span class="en">Workshop Controller</span></span>
+  </div>
+</div>
+
 <footer>
   <div class="wrap">
     <a class="logo on-dark" href="#top" aria-label="movec">
@@ -946,6 +1069,22 @@
     hint.innerHTML = '<span class="de">Präsentieren: ◀ ▶ oder Leertaste</span><span class="en">Present: ◀ ▶ or space bar</span>';
     document.body.appendChild(hint);
     setTimeout(function () { hint.classList.add('hide'); }, 8000);
+  })();
+</script>
+<script>
+  /* ----- PDF-Export: ganze Seite (Deck) + One-Pager, beide via Druckdialog ----- */
+  (function () {
+    var deckBtn = document.getElementById('pdf-deck');
+    var oneBtn = document.getElementById('pdf-onepager');
+    function printOnepager() {
+      document.body.classList.add('print-onepager');
+      var cleanup = function () { document.body.classList.remove('print-onepager'); window.removeEventListener('afterprint', cleanup); };
+      window.addEventListener('afterprint', cleanup);
+      setTimeout(cleanup, 1500);
+      window.print();
+    }
+    if (deckBtn) deckBtn.addEventListener('click', function () { document.body.classList.remove('print-onepager'); window.print(); });
+    if (oneBtn) oneBtn.addEventListener('click', printOnepager);
   })();
 </script>
 
