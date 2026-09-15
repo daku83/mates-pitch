@@ -421,6 +421,60 @@
   @media print {
     @page { size: A4; margin: 12mm; }
     @page deckpage { size: A4 landscape; margin: 10mm; }
+
+    /* Hero-Polster im Deck: .hero ist kein .band, die Polster-Regel oben greift
+       dort nicht — ohne das laeuft schon die erste Seite ueber. Dazu eine
+       Hoehenbremse fuer grosse Produkt-Screenshots. */
+    body:not(.print-onepager) .hero { padding: 6mm 0 !important; }
+    body:not(.print-onepager) .shot-frame img { max-height: 430px; width: auto; margin: 0 auto; }
+
+    /* Deck-Kompaktierung: Typografie und Abstaende so weit eindampfen, dass eine
+       Sektion auf eine Querformat-Seite passt (Inhaltsflaeche ca. 1047 x 718 px).
+       Gilt nur fuer den Deck-Druck, nicht fuer den One-Pager und nicht am Schirm. */
+    body:not(.print-onepager) { font-size: 12.5px; line-height: 1.45; }
+    body:not(.print-onepager) h1 { font-size: 34px; }
+    body:not(.print-onepager) h2 { font-size: 23px; }
+    body:not(.print-onepager) h3 { font-size: 14.5px; }
+    body:not(.print-onepager) .lead { font-size: 13px; line-height: 1.4; }
+    body:not(.print-onepager) .eyebrow { font-size: .64rem; margin-bottom: 8px; }
+    body:not(.print-onepager) .head { margin-bottom: 14px; }
+    body:not(.print-onepager) .panel { padding: 15px 16px; }
+    body:not(.print-onepager) .pcard { padding: 16px 15px; }
+    body:not(.print-onepager) .vm-card { padding: 12px 14px; }
+    body:not(.print-onepager) .vm-card p { font-size: 1rem; margin-top: 8px; }
+    body:not(.print-onepager) .stat { padding: 14px 15px; }
+    body:not(.print-onepager) .addon { padding: 14px 15px; }
+    body:not(.print-onepager) .stat-grid,
+    body:not(.print-onepager) .proof-grid,
+    body:not(.print-onepager) .cards,
+    body:not(.print-onepager) .addon-grid,
+    body:not(.print-onepager) .expect-grid,
+    body:not(.print-onepager) .vm-cards,
+    body:not(.print-onepager) .tech-grid,
+    body:not(.print-onepager) .fact-strip,
+    body:not(.print-onepager) .shot-frame { margin-top: 16px; gap: 11px; }
+    body:not(.print-onepager) .chips { margin-top: 12px; }
+    body:not(.print-onepager) .bridge { margin-top: 16px; font-size: 14px; }
+    body:not(.print-onepager) .shot-cap { margin-top: 10px; font-size: .78rem; }
+    body:not(.print-onepager) .pcard ul,
+    body:not(.print-onepager) .vm-card ul { margin-top: 11px; gap: 7px; }
+    body:not(.print-onepager) .closing .thesis { font-size: 14px; margin-top: 16px; }
+
+    /* Chrome und Edge werten die Breiten-Media-Queries im Druck gegen die
+       hochformatige Default-@page aus (~703 px) — auch wenn das Deck quer auf
+       ~1047 px gesetzt wird. Ohne die folgenden Zeilen greifen die Mobile-
+       Breakpoints, die Raster klappen auf eine Spalte und jede Sektion laeuft
+       ueber zwei bis drei Seiten statt ueber eine. Neue Raster mit Breakpoint
+       hier ebenfalls eintragen und mit einem echten Test-PDF gegenpruefen. */
+    body:not(.print-onepager) .stakes .wrap { grid-template-columns: 1.05fr .95fr; }
+    body:not(.print-onepager) .split-grid { grid-template-columns: 1fr 1fr; }
+    body:not(.print-onepager) .end-grid { grid-template-columns: 1fr 1fr; }
+    body:not(.print-onepager) .strip { grid-template-columns: 1fr 1fr; }
+    body:not(.print-onepager) .ai-grid { grid-template-columns: 1.05fr .95fr; }
+    body:not(.print-onepager) .diag-strip { grid-template-columns: repeat(4, 1fr); }
+    body:not(.print-onepager) .pipe { grid-template-columns: 1fr 1fr 1fr; }
+    body:not(.print-onepager) .cards { grid-template-columns: repeat(3, 1fr); }
+    body:not(.print-onepager) .wn-cards { grid-template-columns: repeat(3, 1fr); }
     * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
     html, body { background: #fff !important; }
     .nav, .dots, .kbd-hint, .pdfbar { display: none !important; }
